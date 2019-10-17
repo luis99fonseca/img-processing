@@ -1,6 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <img-proc.h>
+
+ArrayPixel * create_array_pixel(unsigned char r, unsigned char g, unsigned char b)
+{
+    ArrayPixel *pixel;
+    pixel = (ArrayPixel*)malloc(sizeof(ArrayPixel));
+    pixel->data[0] = r;
+    pixel->data[1] = g;
+    pixel->data[2] = b;
+    return pixel;
+}
+
+RGBPixel * create_rgb_pixel(unsigned char r, unsigned char g, unsigned char b)
+{
+    RGBPixel *pixel;
+    pixel = (RGBPixel*)malloc(sizeof(RGBPixel));
+    pixel->r = r;
+    pixel->g = g;
+    pixel->b = b;
+    return pixel;
+}
+
 
 int main() 
 {
