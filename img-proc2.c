@@ -33,37 +33,51 @@ int main()
 
     fp = fopen("lena.ppm", "rb");
     fseek(fp, offset + 1, SEEK_SET);
-    unsigned char *colorR = (unsigned char*) malloc(sizeof(unsigned char));
+/*    unsigned char *colorR = (unsigned char*) malloc(sizeof(unsigned char));
     unsigned char *colorG = (unsigned char*) malloc(sizeof(unsigned char));
-    unsigned char *colorB = (unsigned char*) malloc(sizeof(unsigned char));
+    unsigned char *colorB = (unsigned char*) malloc(sizeof(unsigned char));*/
     unsigned char rgbArray[3];
     unsigned char *needsChar = (unsigned char*) malloc(sizeof(unsigned char));
+    printf("size uchar: %ld\n", sizeof(unsigned char));
 
-    int index = -1;                  
+    int index = -1;
+    long rounds2 = 0;                  
     while ( fgets(needsChar, sizeof(needsChar), fp) != NULL){
-
+        
+        
         rgbArray[index = ++index % 3] = *needsChar;
-       /* printf("index: %d\n", index);*/
+        printf("i= %d\n", index);
         if (index == 2){
-            printf("%u - %u - %u\n", rgbArray[0], rgbArray[1],rgbArray[2]);
+            
+            printf("offsefINSIDE: %ld\n", ftell(fp));
+            printf("%ld: %u - %u - %u\n",rounds2++, rgbArray[0], rgbArray[1],rgbArray[2]);
+        }
+        
+        if (rounds2 == 10){
+            break;
         }
     }
 
+   /* int bytesread = 0;
+    while ((bytesread = fread(needsChar, 1, sizeof(needsChar), fp)) > 0){
+        
+        
+        rgbArray[index = ++index % 3] = *needsChar;
+        printf("i= %d\n", index);
+        if (index == 2){
+            printf("offsefINSIDE: %ld\n", ftell(fp));
+            printf("%ld: %u - %u - %u\n",rounds2++, rgbArray[0], rgbArray[1],rgbArray[2]);
+        }
+        rounds2++;
+        
+    }*/
 
-    int count = 0;
-    /*fscanf(fp, "%s", pixel);*/
-    /*fread(pixel, sizeof(unsigned char), 1, fp);
-    printf("%u\n", *pixel); //%u -> unsigned decimal integer
-    printf("%ld\n", sizeof(unsigned char));*/
-    // Reading a file one byte at a time would incur massive I/O overhead
-    /*while (!feof(fp)){
-        fgets(pixel, sizeof(int), fp);
-        printf("é: %d\n", pixel);
-        count++;
-    }
-*/    printf("%d\n", count);
-
-
+     printf("pixeis: %ld\n", rounds2);
+    long offset2 = ftell(fp);
+    printf("offsef2: %ld\n", ftell(fp));
+    fseek(fp, 0, SEEK_END);
+    long endset = ftell(fp);
+    printf("endset: %ld\n", ftell(fp));
     fclose(fp);
     return 0;
 }
