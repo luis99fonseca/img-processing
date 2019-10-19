@@ -38,17 +38,19 @@ int main()
     unsigned char *colorB = (unsigned char*) malloc(sizeof(unsigned char));*/
     unsigned char rgbArray[3];
     unsigned char *needsChar = (unsigned char*) malloc(sizeof(unsigned char));
-    printf("size uchar: %ld\n", sizeof(unsigned char));
+    printf("size uchar: %ld, nedchar:%ld\n", sizeof(unsigned char), sizeof(needsChar));
 
     int index = -1;
-    long rounds2 = 0;                  
-    while ( fgets(needsChar, sizeof(needsChar), fp) != NULL){
+    long rounds2 = 0;     
+
+    //nao é bom pa ler binario             
+    /*while ( fgets(needsChar, sizeof(needsChar), fp) != NULL){
         
         
         rgbArray[index = ++index % 3] = *needsChar;
-        printf("i= %d\n", index);
+        printf("i= %d; read: %ld\n", index, strlen(needsChar));
         if (index == 2){
-            
+
             printf("offsefINSIDE: %ld\n", ftell(fp));
             printf("%ld: %u - %u - %u\n",rounds2++, rgbArray[0], rgbArray[1],rgbArray[2]);
         }
@@ -57,20 +59,21 @@ int main()
             break;
         }
     }
-
-   /* int bytesread = 0;
-    while ((bytesread = fread(needsChar, 1, sizeof(needsChar), fp)) > 0){
+    */
+    int bytesread = 0;
+    while ((bytesread = fread(needsChar, sizeof(*needsChar), 1, fp)) > 0){
         
         
         rgbArray[index = ++index % 3] = *needsChar;
-        printf("i= %d\n", index);
+        /*printf("i= %d; read: %d\n", index, bytesread);*/
         if (index == 2){
-            printf("offsefINSIDE: %ld\n", ftell(fp));
+            /*printf("offsefINSIDE: %ld\n", ftell(fp));*/
             printf("%ld: %u - %u - %u\n",rounds2++, rgbArray[0], rgbArray[1],rgbArray[2]);
         }
-        rounds2++;
-        
-    }*/
+        /*if (rounds2 == 10){
+            break;
+        }*/
+    }
 
      printf("pixeis: %ld\n", rounds2);
     long offset2 = ftell(fp);
