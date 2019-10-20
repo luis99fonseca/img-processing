@@ -82,5 +82,10 @@ int main()
     long endset = ftell(fp);
     printf("endset: %ld\n", ftell(fp));
     fclose(fp);
+
+
+    
+
+
     return 0;
 }
