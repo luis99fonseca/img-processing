@@ -14,18 +14,18 @@ int main()
         exit(EXIT_FAILURE);
 
 
-    FILE *fp2 = fopen("lena3.ppm", "w");
-    /*fp = fopen("lena3.ppm", "w");*/
+    FILE *fp2 = fopen("lena2.ppm", "w");
+    /*fp = fopen("lena2.ppm", "w");*/
     if (fp2 == NULL)
     {
         printf("Error opening file!\n");
         exit(1);
     }
 
-    fprintf(fp2, "%s\n", "P5");
+    fprintf(fp2, "%s\n", "P6");
     fprintf(fp2, "%s\n", "512 512");
     fprintf(fp2, "%s\n", "255");
-    fp2 = fopen("lena3.ppm", "ab");
+    fp2 = fopen("lena2.ppm", "ab");
 
     fscanf(fp, "%s", type);
     printf("%s\n", type);
@@ -83,14 +83,7 @@ int main()
         if (index == 2){
             /*printf("offsefINSIDE: %ld\n", ftell(fp));*/
             printf("%ld: %u - %u - %u\n",rounds2++, rgbArray[0], rgbArray[1],rgbArray[2]);
-            unsigned char mediaCor2 = (rgbArray[0] + rgbArray[1] + rgbArray[2]) / 3;
-            unsigned char mediaCor3 = ((0.3 * rgbArray[0]) + (0.59 * rgbArray[1]) + (0.11 * rgbArray[2]));
-            printf("media2 : %u; media3 : %u\n", mediaCor2, mediaCor3);
-            //printf(">>> %d\n", mediaCor);
-            
-                fwrite(&mediaCor3, sizeof(mediaCor3), 1, fp2);
-            
-            
+            fwrite(rgbArray, sizeof(*needsChar), 3, fp2);
         }
         /*if (rounds2 == 10){
             break;
