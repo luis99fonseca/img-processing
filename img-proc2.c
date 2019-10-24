@@ -3,8 +3,9 @@
 #include <string.h>
 
 int main() 
-{
-    FILE *fp = fopen("lena.ppm", "r");
+{   
+    char *name = "lena1.ppm";
+    FILE *fp = fopen(name, "r");
     printf("Hello World!\n");
 
 
@@ -45,7 +46,7 @@ int main()
     fclose(fp);
 
 
-    fp = fopen("lena.ppm", "rb");
+    fp = fopen(name, "rb");
     fseek(fp, offset + 1, SEEK_SET);
 /*    unsigned char *colorR = (unsigned char*) malloc(sizeof(unsigned char));
     unsigned char *colorG = (unsigned char*) malloc(sizeof(unsigned char));
