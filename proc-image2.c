@@ -22,7 +22,7 @@ int main()
         exit(1);
     }
 
-    fprintf(fp2, "%s\n", "P6");
+    fprintf(fp2, "%s\n", "P4");
     fprintf(fp2, "%s\n", "512 512");
     fprintf(fp2, "%s\n", "255");
     fp2 = fopen("lena2.ppm", "ab");

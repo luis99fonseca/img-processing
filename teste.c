@@ -13,4 +13,9 @@ int main(){
 	printf("> %d\n", adeus);
 	printf("%d\n", adeus = adeus++ % 3);
 	printf("> %d\n", adeus);
+	int xau = 10;
+	while (xau > 0){
+		printf("%d\n", xau);
+		xau--;
+	}
 }
