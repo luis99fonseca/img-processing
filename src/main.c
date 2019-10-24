@@ -1,7 +1,7 @@
-#include <stdio.h>
-#include "img-proc.h"
+#include <structs.h>
 
 int main() 
 {
-    return 0;
+
+    return 1;
 }
