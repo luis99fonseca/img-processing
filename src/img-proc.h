@@ -102,6 +102,9 @@ BinaryPixel * create_binary_pixel(unsigned char color);
  * @return A pointer to the created Image structure
 */
 ImageRGB * create_imageRGB(int length, int heigth);
+ImageGray * create_imageGray(int length, int heigth);
+ImageBin * create_imageBin(int length, int heigth);
+
 
 ImageRGB * read_rgb(char *file_name);
 ImageGray * read_gray(char *file_name);
