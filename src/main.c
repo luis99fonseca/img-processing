@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "img-proc.h"
+#include "structs.h"
 
 int main() 
 {
