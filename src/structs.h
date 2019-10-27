@@ -110,6 +110,16 @@ ImageRGB * read_rgb(char *file_name);
 ImageGray * read_gray(char *file_name);
 ImageBin * read_bin(char *file_name);
 
-void * write_rgb(ImageRGB *image, char* file_name);
-void * write_gray(ImageGray *image);
-void * write_bin(ImageBin *image);
+void write_rgb(ImageRGB *image, char* file_name);
+void write_gray(ImageGray *image);
+void write_bin(ImageBin *image);
+
+/**
+ * Function to change the intensity of a RGB image.
+ * 
+ * @param image: a pointer to a RGB image
+ * @param char: intensity value 
+*/
+void change_rgb_intensity(ImageRGB *image, char intensity);
+
+ImageRGB * crop(ImageRGB *image, int x1, int y1, int x2, int y2);

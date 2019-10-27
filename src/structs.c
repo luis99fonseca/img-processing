@@ -219,8 +219,9 @@ ImageBin * read_bin(char *file_name)
 }
 
 
-void * write_rgb(ImageRGB* image, char* file_name){
-
+void write_rgb(ImageRGB* image, char* file_name){
+    
+    
     FILE *fp = fopen(file_name, "w");   
     fprintf(fp, "%s\n", "P6");  //TODO : muda os sizes para coiso dinamico 
     fprintf(fp, "%d %d\n", image->heigth, image->length);
@@ -234,21 +235,70 @@ void * write_rgb(ImageRGB* image, char* file_name){
         }
         
     }
-    printf("%u ----", image->a[262143].rgb[0]);
     fclose(fp);
+    
 
 }
-void * write_gray(ImageGray *image){
+void write_gray(ImageGray *image){
     
 }
-void * write_bin(ImageBin *image){
+void write_bin(ImageBin *image){
 
 }
 
-int main() 
+void change_rgb_intensity(ImageRGB *image, char intensity)
 {
-    /* read_rgb("lena.ppm"); */
-    ImageRGB* imagem = read_rgb("lena.ppm");
-    write_rgb(imagem, "ola.ppm"); 
+    
+    for (int i = 0; i < image->heigth * image->length; i++)
+    {
+        for (int color = 0; color < 3; color++)
+        {   
+            int result = image->a[i].rgb[color] + intensity;
+            if (result < 0)
+                result = 0;
+
+            if (result > 255)
+                result = 255;
+            
+            // because there is no overflow on the result, we can cast int to unsigned int directly
+            image->a[i].rgb[color] = result;
+            
+
+        }
+    }
+}
+
+ImageRGB * crop(ImageRGB *image, int x1, int y1, int x2, int y2)
+{
+    int total_length = image->length;
+
+
+    int new_heigth = y2 - y1;
+    int new_length = x2 - x1;
+
+    ImageRGB* cropedImage = create_imageRGB(new_length, new_heigth);  
+
+    for (int y = 0; y < new_heigth; y++)
+    {
+        for (int x = 0; x < new_length; x++)
+        {   
+            //printf("(%d,%d) = %d\n",y,x,y*new_length + x);
+            //printf("(%d,%d) = %d\n",(y1+y),(x1+x),(y1+y)*total_length + (x1+x));
+            // TODO: tornar mais eficiente
+            cropedImage->a[y*new_length + x].rgb[0] = image->a[(y1+y)*total_length + (x1+x)].rgb[0];
+            cropedImage->a[y*new_length + x].rgb[1] = image->a[(y1+y)*total_length + (x1+x)].rgb[1];
+            cropedImage->a[y*new_length + x].rgb[2] = image->a[(y1+y)*total_length + (x1+x)].rgb[2];
+        }
+    }
+
+
+    return cropedImage;
 
 }
+
+//int main() 
+//{
+//    /* read_rgb("lena.ppm"); */
+//    ImageRGB* imagem = read_rgb("lena.ppm");
+//    write_rgb(imagem, "ola.ppm"); 
+//}
