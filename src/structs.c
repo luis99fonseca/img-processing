@@ -123,13 +123,13 @@ ImageGray * read_gray(char *file_name)
     int bytes_count = 0;
     while ((bytesread = fread(needsChar, sizeof(*needsChar), 1, fp)) > 0){
 
-        printf("%ld: %u\n",rounds2++, *needsChar);
+//        printf("%ld: %u\n",rounds2++, *needsChar);
         GrayPixel *temp_pixel = create_gray_pixel(*needsChar);
         image->a[bytes_count++] = *temp_pixel;
     }
     printf("[INFO]: %s; BytesCounted: %d", "Done", bytes_count);
     printf("[TODO]>>> %u", image->a[bytes_count - 1].color);
-
+    return image;
 }
 
 ImageRGB * read_rgb(char *file_name)
@@ -219,7 +219,7 @@ ImageBin * read_bin(char *file_name)
 }
 
 
-void * write_rgb(ImageRGB* image, char* file_name){
+void write_rgb(ImageRGB* image, char* file_name){
 
     FILE *fp = fopen(file_name, "w");   
     fprintf(fp, "%s\n", "P6");  //TODO : muda os sizes para coiso dinamico 
@@ -238,17 +238,28 @@ void * write_rgb(ImageRGB* image, char* file_name){
     fclose(fp);
 
 }
-void * write_gray(ImageGray *image){
-    
+void write_gray(ImageGray *image, char* file_name){
+    FILE *fp = fopen(file_name, "w");   
+    fprintf(fp, "%s\n", "P5");  //TODO : muda os sizes para coiso dinamico 
+    fprintf(fp, "%d %d\n", image->heigth, image->length);
+    fprintf(fp, "%s\n", "255"); // TODO: isto devia tar registado tbm
+    fclose(fp);
+    fp = fopen(file_name, "ab");
+    for (int index = 0; index < image->heigth * image->length; index++ ){
+        //TODO : meter o "3" menos hardcocded?
+        fwrite(&image->a[index].color, sizeof(unsigned char), 1, fp);
+    }
+    printf("%u ----", image->a[262143].color);
+    fclose(fp);
 }
-void * write_bin(ImageBin *image){
+void write_bin(ImageBin *image, char* file_name){
 
 }
 
 int main() 
 {
     /* read_rgb("lena.ppm"); */
-    ImageRGB* imagem = read_rgb("lena.ppm");
-    write_rgb(imagem, "ola.ppm"); 
+    ImageGray* imagem = read_gray("lena2.ppm");
+    write_gray(imagem, "ola2.ppm"); 
 
 }
