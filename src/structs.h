@@ -45,10 +45,27 @@ typedef struct
 */
 typedef struct
 {
-    int *a;
+    RGBPixel *a;
     int n;
-    int size;
-} Image;
+    int length;
+    int heigth;
+} ImageRGB;
+
+typedef struct
+{
+    BinaryPixel *a;
+    int n;
+    int length;
+    int heigth;
+} ImageBin;
+
+typedef struct
+{
+    GrayPixel *a;
+    int n;
+    int length;
+    int heigth;
+} ImageGray;
 
 
 /**
@@ -84,8 +101,15 @@ BinaryPixel * create_binary_pixel(unsigned char color);
  * @param size Size of the image (length * heigth)
  * @return A pointer to the created Image structure
 */
-Image * create_image(int size);
+ImageRGB * create_imageRGB(int length, int heigth);
+ImageGray * create_imageGray(int length, int heigth);
+ImageBin * create_imageBin(int length, int heigth);
 
-Image * read_rgb(char *file_name);
-Image * read_gray(char *file_name);
-Image * read_bin(char *file_name);
+
+ImageRGB * read_rgb(char *file_name);
+ImageGray * read_gray(char *file_name);
+ImageBin * read_bin(char *file_name);
+
+void * write_rgb(ImageRGB *image, char* file_name);
+void * write_gray(ImageGray *image);
+void * write_bin(ImageBin *image);
