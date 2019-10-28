@@ -554,7 +554,7 @@ void overlap(ImageRGB *image, ImageRGB *crop, int x, int y)
 ImageRGB * shrink_rgb(ImageRGB *image, char ratio)
 {
     int length = image->length, heigth = image->heigth;
-    int new_length = length * ratio, new_heigth = heigth * ratio;
+    int new_length = length / ratio, new_heigth = heigth / ratio;
 
     ImageRGB* shrink = create_imageRGB(new_length, new_heigth);
 
@@ -570,6 +570,42 @@ ImageRGB * shrink_rgb(ImageRGB *image, char ratio)
     }
     
     return shrink;
+}
+
+ImageRGB * expand(ImageRGB *image, char ratio)
+{
+    int length = image->length, heigth = image->heigth;
+    int new_length = length * ratio, new_heigth = heigth * ratio;
+
+    ImageRGB* expand = create_imageRGB(new_length, new_heigth);
+
+    for (int i = 0; i < heigth; i++)
+    {
+        for (int j = 0; j < length; j++)
+        {
+            for (int r = 0; r < ratio; r++)
+            {
+                expand->a[expand->n].rgb[0] = image->a[i*length + j].rgb[0];
+                expand->a[expand->n].rgb[1] = image->a[i*length + j].rgb[1];
+                expand->a[expand->n].rgb[2] = image->a[i*length + j].rgb[2];
+                expand->n++;
+            }
+            
+        }
+
+        for(int r = 0; r < ratio - 1; r++)
+        {
+            for (int copy = 0; copy < new_length; copy++)
+            {
+                expand->a[expand->n].rgb[0] = expand->a[expand->n - new_length].rgb[0];
+                expand->a[expand->n].rgb[1] = expand->a[expand->n - new_length].rgb[1];
+                expand->a[expand->n].rgb[2] = expand->a[expand->n - new_length].rgb[2];
+                expand->n++;
+            }
+        }
+    }
+    
+    return expand;
 }
 
 
@@ -675,7 +711,7 @@ unsigned char sumFilter(ImageRGB *image,float filter[9], int line, int col, char
 }
 
 
-int main() 
+/*int main() 
 {   
     ImageRGB* imagemColor = read_rgb("lena.ppm");
     ImageGray* imagemGray = convert_rbgToGray(imagemColor);
@@ -702,6 +738,6 @@ int main()
     ImageGray* imagemB = convert_rbgToGrayParametized(imagem2, "Blue");
     write_gray(imagemR, "colorR.ppm");
     write_gray(imagemG, "colorG.ppm");
-    write_gray(imagemB, "colorB.ppm"); */
+    write_gray(imagemB, "colorB.ppm"); 
 
-}
+}*/

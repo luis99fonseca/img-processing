@@ -4,6 +4,6 @@
 int main() 
 {
     ImageRGB* image = read_rgb("../img/lena.ppm");
-    ImageRGB* shrink = shrink_rgb(image, 2);
-    write_rgb(shrink, "shrink.ppm");
+    ImageRGB* expanded = expand(image, 2);
+    write_rgb(expanded, "../out/expanded.ppm");
 }
