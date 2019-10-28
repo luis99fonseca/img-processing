@@ -290,18 +290,13 @@ ImageRGB * crop(ImageRGB *image, int x1, int y1, int x2, int y2)
     {
         for (int x = 0; x < new_length; x++)
         {   
-            //printf("(%d,%d) = %d\n",y,x,y*new_length + x);
-            //printf("(%d,%d) = %d\n",(y1+y),(x1+x),(y1+y)*total_length + (x1+x));
-            // TODO: tornar mais eficiente
             cropedImage->a[y*new_length + x].rgb[0] = image->a[(y1+y)*total_length + (x1+x)].rgb[0];
             cropedImage->a[y*new_length + x].rgb[1] = image->a[(y1+y)*total_length + (x1+x)].rgb[1];
             cropedImage->a[y*new_length + x].rgb[2] = image->a[(y1+y)*total_length + (x1+x)].rgb[2];
         }
     }
 
-
     return cropedImage;
-
 }
 
 void create_water_mark(ImageRGB *image, int x, int y)
@@ -332,86 +327,122 @@ void create_water_mark(ImageRGB *image, int x, int y)
             image->a[(y+i)*total_length + (x+j)].rgb[2] = r3 <= 255 ? r3 : 255; 
         }
     }
-
+    printf("\nPlaced watermark with success!\n");
 }
 
-ImageRGB * invert_vertically(ImageRGB *image) 
+void invert_vertically(ImageRGB *image) 
 {
 
     int length = image->length, heigth = image->heigth;
 
-    ImageRGB* inverted = create_imageRGB(heigth,length);
+    RGBPixel* inverted =(RGBPixel *)malloc(length * heigth * sizeof(RGBPixel));
     
+    int n = 0;
     for (int i = 0; i < heigth; i++)
     {
         for (int j = length - 1; j >= 0; j--) 
         {
-            inverted->a[inverted->n].rgb[0] = image->a[i*length + j].rgb[0];
-            inverted->a[inverted->n].rgb[1] = image->a[i*length + j].rgb[1];
-            inverted->a[inverted->n].rgb[2] = image->a[i*length + j].rgb[2];
-            inverted->n++;
+            inverted[n].rgb[0] = image->a[i*length + j].rgb[0];
+            inverted[n].rgb[1] = image->a[i*length + j].rgb[1];
+            inverted[n].rgb[2] = image->a[i*length + j].rgb[2];
+            n++;
         }
     }
 
-    return inverted;
+    image->a = inverted;
+    printf("\nInverted image vertically with success!\n");
 }
 
-ImageRGB * invert_horizontally(ImageRGB *image) 
+void invert_horizontally(ImageRGB *image) 
 {
 
     int length = image->length, heigth = image->heigth;
 
-    ImageRGB* inverted = create_imageRGB(heigth,length);
+    RGBPixel* inverted =(RGBPixel *)malloc(length * heigth * sizeof(RGBPixel));
     
+    int n = 0;
     for (int i = heigth - 1; i >= 0; i--)
     {
         for (int j = 0; j < length; j++) 
         {
-            inverted->a[inverted->n].rgb[0] = image->a[i*length + j].rgb[0];
-            inverted->a[inverted->n].rgb[1] = image->a[i*length + j].rgb[1];
-            inverted->a[inverted->n].rgb[2] = image->a[i*length + j].rgb[2];
-            inverted->n++;
+            inverted[n].rgb[0] = image->a[i*length + j].rgb[0];
+            inverted[n].rgb[1] = image->a[i*length + j].rgb[1];
+            inverted[n].rgb[2] = image->a[i*length + j].rgb[2];
+            n++;
         }
     }
 
-    return inverted;
+    image->a = inverted;
+    printf("\nInverted image horizontally with success!\n");
 }
 
-ImageRGB * rotate_left(ImageRGB *image)
+void rotate_left(ImageRGB *image)
 {
     int length = image->length, heigth = image->heigth;
 
-    ImageRGB* inverted = create_imageRGB(heigth,length);
+    RGBPixel* inverted =(RGBPixel *)malloc(length * heigth * sizeof(RGBPixel));
 
+    int n = 0;
     for (int j = length - 1; j >= 0; j--)
     {
         for (int i = 0; i < heigth; i++)
         {
-            inverted->a[inverted->n].rgb[0] = image->a[i*length + j].rgb[0];
-            inverted->a[inverted->n].rgb[1] = image->a[i*length + j].rgb[1];
-            inverted->a[inverted->n].rgb[2] = image->a[i*length + j].rgb[2];
-            inverted->n++;
+            inverted[n].rgb[0] = image->a[i*length + j].rgb[0];
+            inverted[n].rgb[1] = image->a[i*length + j].rgb[1];
+            inverted[n].rgb[2] = image->a[i*length + j].rgb[2];
+            n++;
         }
     }
-    return inverted;
+
+    image->a = inverted;
+    printf("\nRotated image 90º with success!\n");
 
 }
 
-ImageRGB * rotate_right(ImageRGB *image) 
+void rotate_right(ImageRGB *image) 
 {
     int length = image->length, heigth = image->heigth;
 
-    ImageRGB* inverted = create_imageRGB(heigth,length);
+    RGBPixel* inverted =(RGBPixel *)malloc(length * heigth * sizeof(RGBPixel));
 
+    int n = 0;
     for (int j = 0; j < length; j++)
     {
         for (int i = heigth - 1; i >= 0; i--)
         {
-            inverted->a[inverted->n].rgb[0] = image->a[i*length + j].rgb[0];
-            inverted->a[inverted->n].rgb[1] = image->a[i*length + j].rgb[1];
-            inverted->a[inverted->n].rgb[2] = image->a[i*length + j].rgb[2];
-            inverted->n++;
+            inverted[n].rgb[0] = image->a[i*length + j].rgb[0];
+            inverted[n].rgb[1] = image->a[i*length + j].rgb[1];
+            inverted[n].rgb[2] = image->a[i*length + j].rgb[2];
+            n++;
         }
     }
-    return inverted;
+    
+    image->a = inverted;
+    printf("\nRotated image -90º with success!\n");
+}
+
+
+void overlap(ImageRGB *image, ImageRGB *crop, int x, int y)
+{
+    int total_length = image->length, total_heigth = image->heigth;
+
+    int crop_length = crop->length, crop_heigth = crop->heigth;
+
+    if (x < 0 || y < 0 || x > total_length - crop_length + 1 || y > total_heigth - crop_heigth)
+    {
+        printf("\nInvalid overlap.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    for (int i = 0; i < crop_heigth /*&& i + y < total_heigth*/; i++)
+    {
+        for (int j = 0; j < crop_length - 1 /*&& j + x < total_length*/; j++)
+        {
+            image->a[(y+i)*total_length + (x+j)].rgb[0] = crop->a[i*crop_length + j].rgb[0]; 
+            image->a[(y+i)*total_length + (x+j)].rgb[1] = crop->a[i*crop_length + j].rgb[1]; 
+            image->a[(y+i)*total_length + (x+j)].rgb[2] = crop->a[i*crop_length + j].rgb[2]; 
+        
+        }
+    }
+    printf("\nImage overlap with success!\n");
 }

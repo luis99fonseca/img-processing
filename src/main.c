@@ -4,5 +4,9 @@
 int main() 
 {
     ImageRGB* image = read_rgb("../img/lena.ppm");
-    //write_rgb(rotated, "rotated_right.ppm"); 
+    ImageRGB* cropped = crop(image, 100, 100, 300, 300);
+    invert_horizontally(cropped);
+    change_rgb_intensity(cropped, -100);
+    overlap(image, cropped, 100, 100);
+    write_rgb(image, "overlap.ppm"); 
 }
