@@ -4,7 +4,7 @@
 
 int main() 
 {   
-    char *name = "lena1.ppm";
+    char *name = "lena4.ppm";
     FILE *fp = fopen(name, "r");
     printf("Hello World!\n");
 
@@ -15,8 +15,8 @@ int main()
         exit(EXIT_FAILURE);
 
 
-    FILE *fp2 = fopen("lena4.ppm", "w");
-    /*fp = fopen("lena3.ppm", "w");*/
+    FILE *fp2 = fopen("lena5.ppm", "w");
+    fp = fopen(name, "rb");
     if (fp2 == NULL)
     {
         printf("Error opening file!\n");
@@ -37,10 +37,10 @@ int main()
     printf("%d x %d\n", *larg, *comp);
     // ver diferença entre malloc e alloc (embora n seja propriamente importante i guess)
    // uint* matrix = (uint*) malloc(*larg * *comp * sizeof(uint));
-
+/* 
     int *colorRange = (int *)malloc(1 * sizeof(int));
     fscanf(fp, "%d", colorRange);
-    printf("%d\n", *colorRange);
+    printf("%d\n", *colorRange); */
     printf("int has %lu bytes :O\n", sizeof(int));
     long offset = ftell(fp);
     printf("offsef: %ld\n", ftell(fp));
@@ -60,51 +60,21 @@ int main()
     long rounds2 = 0;     
 
     int bytesread = 0;
-    char bit = 7;
+    /* char bit = 7; */
     int total = 0;
     unsigned char finalColor = 0;
     unsigned char temp_bit;
     while ((bytesread = fread(needsChar, sizeof(*needsChar), 1, fp)) > 0){
         
-        
-        rgbArray[index = ++index % 3] = *needsChar;
-        /*printf("i= %d; read: %d\n", index, bytesread);*/
+        unsigned char corBig = *needsChar;
+        printf("COR NOW TOTAL: %c\n", corBig);
+        rounds2++;
         int mediaCor4;
-        
+        for (char bit = 7; bit <= 0; bit--){
+           unsigned char temp_color = corBig | (1<<bit);
+           printf("cor: %u; bitC= %u, totalSoFar= %d\n", temp_color, bit, total++);
+        } 
        
-        printf("outsideBit: %d\n", bit);
-        if (index == 2){
-            /*printf("offsefINSIDE: %ld\n", ftell(fp));*/
-            printf(">> %ld: %u - %u - %u\n",rounds2++, rgbArray[0], rgbArray[1],rgbArray[2]);
-            unsigned char mediaCor2 = (rgbArray[0] + rgbArray[1] + rgbArray[2]) / 3;
-            unsigned char mediaCor3 = ((0.3 * rgbArray[0]) + (0.60 * rgbArray[1]) + (0.10 * rgbArray[2]));
-            unsigned char mediaCor4 = mediaCor2;
-           //fwrite(&mediaCor2, sizeof(*needsChar), 1, fp2);
-            unsigned char corBW = (mediaCor4 > 128) ? 0 : 1;
-         //   printf("LOL %u , %u\n",corBW, mediaCor4);
-            if (corBW == 1){
-                temp_bit = 1 << bit; 
-                finalColor |= temp_bit; 
-            }              
-            printf("bit: %d; corBW: %u; corAtual: %u\n", bit, corBW,finalColor);
-            if (bit == 0){
-                bit = 8;
-                total++;
-                printf("Writing... at: %d\n", total);
-                unsigned char mycolor = finalColor;
-                fwrite(&mycolor, sizeof(unsigned char), 1, fp2);
-                //fprintf(fp2, "%c", finalColor);
-                finalColor = 0;
-            }
-            bit--;
-            
-            printf("media2 : %u; media3 : %u\n", mediaCor2, mediaCor3);
-            //printf(">>> %d\n", mediaCor);
-        }
-        /* printf("WHy read???\n");
-        if (rounds2 > 1){
-            break;
-        } */
         
     }
 
