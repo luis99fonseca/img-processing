@@ -331,3 +331,84 @@ void create_water_mark(ImageRGB *image, int x, int y)
     }
 
 }
+
+ImageRGB * invert_vertically(ImageRGB *image) 
+{
+
+    int length = image->length, heigth = image->heigth;
+
+    ImageRGB* inverted = create_imageRGB(heigth,length);
+    
+    for (int i = 0; i < heigth; i++)
+    {
+        for (int j = length - 1; j >= 0; j--) 
+        {
+            inverted->a[inverted->n].rgb[0] = image->a[i*length + j].rgb[0];
+            inverted->a[inverted->n].rgb[1] = image->a[i*length + j].rgb[1];
+            inverted->a[inverted->n].rgb[2] = image->a[i*length + j].rgb[2];
+            inverted->n++;
+        }
+    }
+
+    return inverted;
+}
+
+ImageRGB * invert_horizontally(ImageRGB *image) 
+{
+
+    int length = image->length, heigth = image->heigth;
+
+    ImageRGB* inverted = create_imageRGB(heigth,length);
+    
+    for (int i = heigth - 1; i >= 0; i--)
+    {
+        for (int j = 0; j < length; j++) 
+        {
+            inverted->a[inverted->n].rgb[0] = image->a[i*length + j].rgb[0];
+            inverted->a[inverted->n].rgb[1] = image->a[i*length + j].rgb[1];
+            inverted->a[inverted->n].rgb[2] = image->a[i*length + j].rgb[2];
+            inverted->n++;
+        }
+    }
+
+    return inverted;
+}
+
+ImageRGB * rotate_left(ImageRGB *image)
+{
+    int length = image->length, heigth = image->heigth;
+
+    ImageRGB* inverted = create_imageRGB(heigth,length);
+
+    for (int j = length - 1; j >= 0; j--)
+    {
+        for (int i = 0; i < heigth; i++)
+        {
+            inverted->a[inverted->n].rgb[0] = image->a[i*length + j].rgb[0];
+            inverted->a[inverted->n].rgb[1] = image->a[i*length + j].rgb[1];
+            inverted->a[inverted->n].rgb[2] = image->a[i*length + j].rgb[2];
+            inverted->n++;
+        }
+    }
+    return inverted;
+
+}
+
+ImageRGB * rotate_right(ImageRGB *image) 
+{
+    int length = image->length, heigth = image->heigth;
+
+    ImageRGB* inverted = create_imageRGB(heigth,length);
+
+    for (int j = 0; j < length; j++)
+    {
+        for (int i = heigth - 1; i >= 0; i--)
+        {
+            inverted->a[inverted->n].rgb[0] = image->a[i*length + j].rgb[0];
+            inverted->a[inverted->n].rgb[1] = image->a[i*length + j].rgb[1];
+            inverted->a[inverted->n].rgb[2] = image->a[i*length + j].rgb[2];
+            inverted->n++;
+        }
+    }
+    return inverted;
+}

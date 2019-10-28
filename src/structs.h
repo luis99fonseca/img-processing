@@ -125,3 +125,9 @@ void change_rgb_intensity(ImageRGB *image, char intensity);
 ImageRGB * crop(ImageRGB *image, int x1, int y1, int x2, int y2);
 
 void create_water_mark(ImageRGB *image, int x1, int y1);
+
+ImageRGB * invert_vertically(ImageRGB *image);
+ImageRGB * invert_horizontally(ImageRGB *image);
+
+ImageRGB * rotate_left(ImageRGB *image);
+ImageRGB * rotate_right(ImageRGB *image);
