@@ -302,11 +302,14 @@ void apply_filter_toRGB(ImageRGB* image, float filter[9]){
             } else {
             //    printf("--- %s", "seg fodeu\n");
                 count++;
+              //  printf("\n");
                 for (int color = 0; color < 3; color++){     
                     temp_a[line *  total_cols + col].rgb[color] = sumFilter(image, filter, line, col, color);                    
                 }
             }
-            
+           /*  if (count > 1){
+                return;
+            } */
         }
     }
     //free(image->a);
@@ -316,18 +319,27 @@ void apply_filter_toRGB(ImageRGB* image, float filter[9]){
 
 // acho que vai ter de ser sumFilterRGB...
 unsigned char sumFilter(ImageRGB *image,float filter[9], int line, int col, char channel){
-    float value = 0;
-    float temp_value;
-  //  printf(":: %s L=%d, C=%d\n","at sumFilter:",line,col);
+    int value = 0;
+    int temp_value;
+  // printf(":: %s L=%d, C=%d\n","at sumFilter:",line,col);
     for (int temp_line = -1 ; temp_line <= 1; temp_line++){
         for (int temp_col = - 1; temp_col <= 1; temp_col++){  
-          //  printf(" ||| line: %d, col: %d; indexA: %d, indexB: %d\n", (temp_line + line), (temp_col + col), (temp_line + line) * image->length + (temp_col + col), (temp_line + 1) * 3 + (temp_col + 1));                                                           //TODO : hardcoded here
+           // printf(" ||| line: %d, col: %d; indexA: %d, indexB: %d\n", (temp_line + line), (temp_col + col), (temp_line + line) * image->length + (temp_col + col), (temp_line + 1) * 3 + (temp_col + 1));                                                           //TODO : hardcoded here
             temp_value = image->a[(temp_line + line) * image->length + (temp_col + col)].rgb[channel] * filter[(temp_line + 1) * 3 + (temp_col + 1)];
-           // printf("corA: %u; corB: %f;  temp_value: %f\n",image->a[(temp_line + line) * image->length + (temp_col + col)].rgb[channel],filter[(temp_line + 1) * 3 + (temp_col + 1)] ,temp_value);
+           // printf("corA: %u; corB: %f;  temp_value: %d\n",image->a[(temp_line + line) * image->length + (temp_col + col)].rgb[channel],     filter[(temp_line + 1) * 3 + (temp_col + 1)] ,    temp_value);
             value += temp_value;
         }
     }
-   
+    if (value > 255){
+      //  printf("VALOR: %d\n", value);
+        value = 255;
+     //   printf("VALOR NOW: %d\n", value);
+    } else if (value < 0)
+    {
+        value = 0;
+    }
+    
+
     return (unsigned char) value;
 }
 
@@ -336,10 +348,9 @@ int main()
 {
     ImageRGB *imagem2 = read_rgb("lena.ppm"); 
     float filter[9] = {(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9)};
-    printf("\nLFOAD: %f\n", (1.0/9));
-    float filter2[9] = {0,1,0,
-                        1,-4,1,
-                        0,1,0};
+    float filter2[9] = {-1,-1,-1,
+                        -1,8,-1,
+                        -1,-1,-1};
     apply_filter_toRGB(imagem2, filter2);
     write_rgb(imagem2, "filtros3.ppm");
 
