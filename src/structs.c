@@ -320,13 +320,16 @@ void create_water_mark(ImageRGB *image, int x, int y)
         exit(EXIT_FAILURE);
     }
 
-    for (int i = 0; i < water_mark_heigth && i + y < total_heigth; i++)
+    for (int i = 0; i < water_mark_heigth /*&& i + y < total_heigth*/; i++)
     {
-        for (int j = 0; j < water_mark_length - 1 && j + x < total_length; j++)
+        for (int j = 0; j < water_mark_length - 1 /*&& j + x < total_length*/; j++)
         {
-            image->a[(y+i)*total_length + (x+j)].rgb[0] = round(image->a[(y+i)*total_length + (x+j)].rgb[0] * 0.60) +  round(water_mark->a[i*water_mark_length + j].rgb[0] * 0.40);
-            image->a[(y+i)*total_length + (x+j)].rgb[1] = round(image->a[(y+i)*total_length + (x+j)].rgb[1] * 0.60) +  round(water_mark->a[i*water_mark_length + j].rgb[1] * 0.40);
-            image->a[(y+i)*total_length + (x+j)].rgb[2] = round(image->a[(y+i)*total_length + (x+j)].rgb[2] * 0.60) +  round(water_mark->a[i*water_mark_length + j].rgb[2] * 0.40);
+            double r1 = round(image->a[(y+i)*total_length + (x+j)].rgb[0] * 0.60) +  round(water_mark->a[i*water_mark_length + j].rgb[0] * 0.40);
+            double r2 = round(image->a[(y+i)*total_length + (x+j)].rgb[1] * 0.60) +  round(water_mark->a[i*water_mark_length + j].rgb[1] * 0.40);
+            double r3 = round(image->a[(y+i)*total_length + (x+j)].rgb[2] * 0.60) +  round(water_mark->a[i*water_mark_length + j].rgb[2] * 0.40);
+            image->a[(y+i)*total_length + (x+j)].rgb[0] = r1 <= 255 ? r1 : 255; 
+            image->a[(y+i)*total_length + (x+j)].rgb[1] = r2 <= 255 ? r2 : 255; 
+            image->a[(y+i)*total_length + (x+j)].rgb[2] = r3 <= 255 ? r3 : 255; 
         }
     }
 
