@@ -37,7 +37,7 @@ ImageRGB * create_imageRGB(int length, int heigth)
     img->n = 0; //TODO ver se é necessario
     img->length = length;
     img->heigth = heigth;
-    img->a =(RGBPixel *)calloc(length * heigth, sizeof(RGBPixel));
+    img->a =(RGBPixel *)malloc(length * heigth * sizeof(RGBPixel));
 
     return img;
 }
@@ -50,7 +50,7 @@ ImageGray * create_imageGray(int length, int heigth)
     img->n = 0; //TODO ver se é necessario
     img->length = length;
     img->heigth = heigth;
-    img->a =(GrayPixel *)calloc(length * heigth, sizeof(GrayPixel));
+    img->a =(GrayPixel *)malloc(length * heigth * sizeof(GrayPixel));
 
     return img;
 }
@@ -63,7 +63,7 @@ ImageBin * create_imageBin(int length, int heigth)
     img->n = 0; //TODO ver se é necessario
     img->length = length;
     img->heigth = heigth;
-    img->a =(BinaryPixel *)calloc(length * heigth, sizeof(BinaryPixel));
+    img->a =(BinaryPixel *)malloc(length * heigth * sizeof(BinaryPixel));
 
     return img;
 }
@@ -369,7 +369,7 @@ ImageGray* convert_rbgToGrayParametized(ImageRGB* image, char* color){
 }
 
 void apply_filter_toRGB(ImageRGB* image, float filter[9]){ // TODO: por malloc, pa n inicizalizar
-    RGBPixel *temp_a = (RGBPixel *)calloc(image->length * image->heigth, sizeof(GrayPixel));
+    RGBPixel *temp_a = (RGBPixel *)malloc(image->length * image->heigth * sizeof(GrayPixel));
     int total_cols = image->length;
     int count = 0;
     //TODO: eventualmente nao meter o if no meio, e depois no fim atualizar esses valores pa serem iguais ao do cenas original
