@@ -9,14 +9,13 @@ int main()
     printf("Hello World!\n");
 
 
-    char *type = (char *) malloc(3 * sizeof(char));
+    
 
     if (fp == NULL)
         exit(EXIT_FAILURE);
 
-
     FILE *fp2 = fopen("lena5.ppm", "w");
-    fp = fopen(name, "rb");
+    
     if (fp2 == NULL)
     {
         printf("Error opening file!\n");
@@ -29,6 +28,8 @@ int main()
     fclose(fp2);
     fp2 = fopen("lena4.ppm", "ab");
 
+
+    char *type = (char *) malloc(3 * sizeof(char));
     fscanf(fp, "%s", type);
     printf("%s\n", type);
 
@@ -49,10 +50,9 @@ int main()
 
     fp = fopen(name, "rb");
     fseek(fp, offset + 1, SEEK_SET);
-/*    unsigned char *colorR = (unsigned char*) malloc(sizeof(unsigned char));
-    unsigned char *colorG = (unsigned char*) malloc(sizeof(unsigned char));
-    unsigned char *colorB = (unsigned char*) malloc(sizeof(unsigned char));*/
-    unsigned char rgbArray[3];
+
+
+
     unsigned char *needsChar = (unsigned char*) malloc(sizeof(unsigned char));
     printf("size uchar: %ld, nedchar:%ld\n", sizeof(unsigned char), sizeof(needsChar));
 
@@ -67,12 +67,13 @@ int main()
     while ((bytesread = fread(needsChar, sizeof(*needsChar), 1, fp)) > 0){
         
         unsigned char corBig = *needsChar;
-        printf("COR NOW TOTAL: %c\n", corBig);
+        printf("COR NOW TOTAL: %u\n", corBig);
         rounds2++;
         int mediaCor4;
-        for (char bit = 7; bit <= 0; bit--){
-           unsigned char temp_color = corBig | (1<<bit);
-           printf("cor: %u; bitC= %u, totalSoFar= %d\n", temp_color, bit, total++);
+        for (char bit = 7; bit >= 0; bit--){
+            printf("ola");
+            unsigned char temp_color = corBig & (1<<bit);
+            printf("cor: %u; bitC= %u, totalSoFar= %d\n", temp_color, bit, total++);
         } 
        
         
