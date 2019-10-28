@@ -110,6 +110,12 @@ ImageRGB * read_rgb(char *file_name);
 ImageGray * read_gray(char *file_name);
 ImageBin * read_bin(char *file_name);
 
-void write_rgb(ImageRGB *image, char* file_name);
-void write_gray(ImageGray *image, char* file_name);
-void write_bin(ImageBin *image, char* file_name);
+void write_rgb(ImageRGB* image, char* file_name);
+void write_gray(ImageGray* image, char* file_name);
+void write_bin(ImageBin* image, char* file_name);
+
+ImageGray* convert_rbgToGray(ImageRGB* image);
+ImageGray* convert_rbgToGrayParametized(ImageRGB* image, char* color);
+//TODO : aqui devia returnar uma nova ou so aplicar? FAZER PA RGB E GREY
+void apply_filter_toRGB(ImageRGB* image, float filter[9]); //FILTRO de size fixo?
+unsigned char sumFilter(ImageRGB *image,float filter[9], int line, int col, char channel);

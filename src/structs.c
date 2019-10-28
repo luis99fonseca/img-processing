@@ -256,10 +256,103 @@ void write_bin(ImageBin *image, char* file_name){
 
 }
 
+ImageGray* convert_rbgToGray(ImageRGB *image){
+    ImageGray* new_image = create_imageGray(image->length, image->heigth);
+
+    for (int index = 0; index < image->heigth * image->length; index++){
+        new_image->a[index].color = ((0.3 * image->a[index].rgb[0]) + (0.6 * image->a[index].rgb[0]) + (0.10 * image->a[index].rgb[0]));
+    }
+    return new_image;
+}
+
+// TODO : ver pro histograma!! (OTSUUUU)
+ImageGray* convert_rbgToGrayParametized(ImageRGB* image, char* color){
+    ImageGray* new_image = create_imageGray(image->length, image->heigth);
+
+    char index_color;
+    if (strcmp(color,"Red") == 0){
+        index_color = 0;
+    } else if (strcmp(color,"Green") == 0){
+        index_color = 1;
+    } else if (strcmp(color,"Blue") == 0){
+        index_color = 2;
+    } else {
+        printf("%s\n", "[ERROR] Canal não pertencente ao formato RGB!");
+        exit(EXIT_FAILURE);
+    }
+
+    for (int index = 0; index < image->heigth * image->length; index++){
+        new_image->a[index].color = image->a[index].rgb[index_color];
+    }
+    return new_image;
+
+}
+
+void apply_filter_toRGB(ImageRGB* image, float filter[9]){
+    RGBPixel *temp_a = (RGBPixel *)calloc(image->length * image->heigth, sizeof(GrayPixel));
+    int total_cols = image->length;
+    int count = 0;
+    //TODO: eventualmente nao meter o if no meio, e depois no fim atualizar esses valores pa serem iguais ao do cenas original
+    for (int line = 0; line < image->heigth; line++){
+        for (int col = 0; col < image->length; col++){
+          //  printf(">>>line: %d, col: %d; %d  de %d\n",line, col, line *  total_cols + col, image->length * image->heigth);
+            if (line == 0 || line == image->heigth - 1 || col == 0 || col == image->heigth - 1 ){
+              //  printf("<<< %s", "im in\n");
+                temp_a[line *  total_cols + col] = image->a[line *  total_cols + col];
+            } else {
+            //    printf("--- %s", "seg fodeu\n");
+                count++;
+                for (int color = 0; color < 3; color++){     
+                    temp_a[line *  total_cols + col].rgb[color] = sumFilter(image, filter, line, col, color);                    
+                }
+            }
+            
+        }
+    }
+    //free(image->a);
+    image->a = temp_a;
+
+}
+
+// acho que vai ter de ser sumFilterRGB...
+unsigned char sumFilter(ImageRGB *image,float filter[9], int line, int col, char channel){
+    float value = 0;
+    float temp_value;
+  //  printf(":: %s L=%d, C=%d\n","at sumFilter:",line,col);
+    for (int temp_line = -1 ; temp_line <= 1; temp_line++){
+        for (int temp_col = - 1; temp_col <= 1; temp_col++){  
+          //  printf(" ||| line: %d, col: %d; indexA: %d, indexB: %d\n", (temp_line + line), (temp_col + col), (temp_line + line) * image->length + (temp_col + col), (temp_line + 1) * 3 + (temp_col + 1));                                                           //TODO : hardcoded here
+            temp_value = image->a[(temp_line + line) * image->length + (temp_col + col)].rgb[channel] * filter[(temp_line + 1) * 3 + (temp_col + 1)];
+           // printf("corA: %u; corB: %f;  temp_value: %f\n",image->a[(temp_line + line) * image->length + (temp_col + col)].rgb[channel],filter[(temp_line + 1) * 3 + (temp_col + 1)] ,temp_value);
+            value += temp_value;
+        }
+    }
+   
+    return (unsigned char) value;
+}
+
+
 int main() 
 {
-    /* read_rgb("lena.ppm"); */
-    ImageGray* imagem = read_gray("lena2.ppm");
-    write_gray(imagem, "ola2.ppm"); 
+    ImageRGB *imagem2 = read_rgb("lena.ppm"); 
+    float filter[9] = {(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9)};
+    printf("\nLFOAD: %f\n", (1.0/9));
+    float filter2[9] = {0,1,0,
+                        1,-4,1,
+                        0,1,0};
+    apply_filter_toRGB(imagem2, filter2);
+    write_rgb(imagem2, "filtros3.ppm");
+
+
+    /* ImageGray* imagem = read_gray("lena2.ppm");
+    write_gray(imagem, "ola2.ppm");  */
+   /*  ImageGray* imagem3 = convert_rbgToGray(imagem2);
+    write_gray(imagem3, "adeus2.ppm"); */
+    /* ImageGray* imagemR = convert_rbgToGrayParametized(imagem2, "Red");
+    ImageGray* imagemG = convert_rbgToGrayParametized(imagem2, "Green");
+    ImageGray* imagemB = convert_rbgToGrayParametized(imagem2, "Blue");
+    write_gray(imagemR, "colorR.ppm");
+    write_gray(imagemG, "colorG.ppm");
+    write_gray(imagemB, "colorB.ppm"); */
 
 }
