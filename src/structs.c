@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 #include "structs.h"
 
 RGBPixel * create_rgb_pixel(unsigned char *rgb)
@@ -270,13 +271,20 @@ void change_rgb_intensity(ImageRGB *image, char intensity)
 
 ImageRGB * crop(ImageRGB *image, int x1, int y1, int x2, int y2)
 {
-    int total_length = image->length;
-
+    int total_length = image->length, total_heigth = image->heigth;
 
     int new_heigth = y2 - y1;
     int new_length = x2 - x1;
 
     ImageRGB* cropedImage = create_imageRGB(new_length, new_heigth);  
+
+    if (x1 < 0 || y1 < 0 || x2 < 0 || y2 < 0 
+        || x1 > total_length || x2 > total_length
+        || y1 > total_heigth || y2 > total_heigth)
+    {
+        printf("\nInvalid crop area.\n");
+        exit(EXIT_FAILURE);
+    }
 
     for (int y = 0; y < new_heigth; y++)
     {
@@ -296,9 +304,30 @@ ImageRGB * crop(ImageRGB *image, int x1, int y1, int x2, int y2)
 
 }
 
-//int main() 
-//{
-//    /* read_rgb("lena.ppm"); */
-//    ImageRGB* imagem = read_rgb("lena.ppm");
-//    write_rgb(imagem, "ola.ppm"); 
-//}
+void create_water_mark(ImageRGB *image, int x, int y)
+{   
+    int total_length = image->length, total_heigth = image->heigth;
+
+    ImageRGB* water_mark = read_rgb("../img/water_mark.ppm");
+
+    int water_mark_length = water_mark->length;
+    int water_mark_heigth = water_mark->heigth;
+
+    
+    if (x < 0 || y < 0 || x > total_length - water_mark_length + 1 || y > total_heigth - water_mark_heigth)
+    {
+        printf("\nInvalid watermark placement.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    for (int i = 0; i < water_mark_heigth && i + y < total_heigth; i++)
+    {
+        for (int j = 0; j < water_mark_length - 1 && j + x < total_length; j++)
+        {
+            image->a[(y+i)*total_length + (x+j)].rgb[0] = round(image->a[(y+i)*total_length + (x+j)].rgb[0] * 0.60) +  round(water_mark->a[i*water_mark_length + j].rgb[0] * 0.40);
+            image->a[(y+i)*total_length + (x+j)].rgb[1] = round(image->a[(y+i)*total_length + (x+j)].rgb[1] * 0.60) +  round(water_mark->a[i*water_mark_length + j].rgb[1] * 0.40);
+            image->a[(y+i)*total_length + (x+j)].rgb[2] = round(image->a[(y+i)*total_length + (x+j)].rgb[2] * 0.60) +  round(water_mark->a[i*water_mark_length + j].rgb[2] * 0.40);
+        }
+    }
+
+}

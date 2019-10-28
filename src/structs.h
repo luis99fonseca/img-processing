@@ -123,3 +123,5 @@ void write_bin(ImageBin *image);
 void change_rgb_intensity(ImageRGB *image, char intensity);
 
 ImageRGB * crop(ImageRGB *image, int x1, int y1, int x2, int y2);
+
+void create_water_mark(ImageRGB *image, int x1, int y1);
