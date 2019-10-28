@@ -330,11 +330,6 @@ void create_water_mark(ImageRGB *image, int x, int y)
     printf("\nPlaced watermark with success!\n");
 }
 
-/**
- * Method to invert a RGB image vertically.
- * 
- * @param image A pointer to the RGB image that will be inverted.
-*/
 void invert_vertically(ImageRGB *image) 
 {
 
