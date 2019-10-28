@@ -152,6 +152,7 @@ ImageGray * read_gray(char *file_name);
 */
 ImageBin * read_bin(char *file_name);
 
+
 /**
  * Method to save a RGB image in a PPM file.
  * 
@@ -174,7 +175,7 @@ void write_gray(ImageGray *image,  char* file_name);
  * @param image A pointer to the Binary image.
  * @param file_name Image PPM filename.
 */
-void write_bin(ImageBin *image);
+void write_bin(ImageBin *image, char* file_name);
 
 /**
  * Method to change the intensity of a RGB image.
@@ -245,3 +246,12 @@ void rotate_right(ImageRGB *image);
 void rotate_left(ImageRGB *image);
 
 ImageRGB * shrink_rgb(ImageRGB *image, char ratio);
+
+
+ImageGray* convert_rbgToGray(ImageRGB* image);
+ImageGray* convert_rbgToGrayParametized(ImageRGB* image, char* color);
+ImageBin* convert_grayToBin(ImageGray* image, unsigned char threshold);
+//TODO : aqui devia returnar uma nova ou so aplicar? FAZER PA RGB E GREY
+void apply_filter_toRGB(ImageRGB* image, float filter[9]); //FILTRO de size fixo?
+unsigned char sumFilter(ImageRGB *image,float filter[9], int line, int col, char channel);
+
