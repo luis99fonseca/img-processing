@@ -1,0 +1,35 @@
+Repository to develop an image processing program in C.
+
+\subsection*{Formas de representar píxeis}
+
+
+\begin{DoxyCode}
+\textcolor{comment}{// RGB}
+\textcolor{keyword}{typedef} \textcolor{keyword}{struct }\{
+    uchar r,g,b;
+\} \hyperlink{structRGBPixel}{RGBPixel};
+
+uint data; \textcolor{comment}{// + mask}
+
+uchar data[3];
+
+\textcolor{comment}{// Binary}
+uchar \{0 1\} 
+\end{DoxyCode}
+
+
+\subsection*{Formas de representar imagens}
+
+\hyperlink{structRGBPixel}{R\+G\+B\+Pixel}($\ast$$\ast$data; data\mbox{[}\mbox{]}\mbox{[}\mbox{]}); ($\ast$data; poslin = l$\ast$nc + c);
+
+\subsection*{Aceder a um elemento de uma matriz num array unidimensional}
+
+Matrix N$\ast$M
+
+índices\+: i pertence a \mbox{[}0, N-\/1\mbox{]}, j pertence a \mbox{[}0, M-\/1\mbox{]}
+
+Posição do elemento (i,j)\+:
+
+matriz\mbox{[}i\mbox{]}\mbox{[}j\mbox{]} = array\mbox{[}i$\ast$M + j\mbox{]}
+
+\href{https://stackoverflow.com/questions/14015556/how-to-map-the-indexes-of-a-matrix-to-a-1-dimensional-array-c}{\tt https\+://stackoverflow.\+com/questions/14015556/how-\/to-\/map-\/the-\/indexes-\/of-\/a-\/matrix-\/to-\/a-\/1-\/dimensional-\/array-\/c} 
