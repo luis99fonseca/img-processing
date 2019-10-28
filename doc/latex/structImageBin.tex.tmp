@@ -1,0 +1,33 @@
+\hypertarget{structImageBin}{}\section{Image\+Bin Struct Reference}
+\label{structImageBin}\index{Image\+Bin@{Image\+Bin}}
+
+
+{\ttfamily \#include $<$structs.\+h$>$}
+
+
+
+Collaboration diagram for Image\+Bin\+:
+% FIG 0
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structImageBin_a0549f38be700a48c6dae62a66e2277cd}\label{structImageBin_a0549f38be700a48c6dae62a66e2277cd}} 
+\hyperlink{structBinaryPixel}{Binary\+Pixel} $\ast$ {\bfseries a}
+\item 
+\mbox{\Hypertarget{structImageBin_a7ca58eb8b2e6c7de6698a2596bd1ab59}\label{structImageBin_a7ca58eb8b2e6c7de6698a2596bd1ab59}} 
+int {\bfseries n}
+\item 
+\mbox{\Hypertarget{structImageBin_a9ef9ab5f89fcb7e82ad84a8c0c537add}\label{structImageBin_a9ef9ab5f89fcb7e82ad84a8c0c537add}} 
+int {\bfseries length}
+\item 
+\mbox{\Hypertarget{structImageBin_abbfd6bd9009e4f3964fbd22466920387}\label{structImageBin_abbfd6bd9009e4f3964fbd22466920387}} 
+int {\bfseries heigth}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Structure to represent a binary image with pointer, index and size. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/structs.\+h\end{DoxyCompactItemize}

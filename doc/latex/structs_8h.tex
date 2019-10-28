@@ -1,0 +1,392 @@
+\hypertarget{structs_8h}{}\section{src/structs.h File Reference}
+\label{structs_8h}\index{src/structs.\+h@{src/structs.\+h}}
+This graph shows which files directly or indirectly include this file\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structRGBPixel}{R\+G\+B\+Pixel}
+\item 
+struct \hyperlink{structGrayPixel}{Gray\+Pixel}
+\item 
+struct \hyperlink{structBinaryPixel}{Binary\+Pixel}
+\item 
+struct \hyperlink{structImageRGB}{Image\+R\+GB}
+\item 
+struct \hyperlink{structImageBin}{Image\+Bin}
+\item 
+struct \hyperlink{structImageGray}{Image\+Gray}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structRGBPixel}{R\+G\+B\+Pixel} $\ast$ \hyperlink{structs_8h_a42d827681977a5262e201b056ae57505}{create\+\_\+rgb\+\_\+pixel} (unsigned char $\ast$rgb)
+\item 
+\hyperlink{structGrayPixel}{Gray\+Pixel} $\ast$ \hyperlink{structs_8h_ad5d8263d5ae4a6854f7da10cadafad4b}{create\+\_\+gray\+\_\+pixel} (unsigned char color)
+\item 
+\hyperlink{structBinaryPixel}{Binary\+Pixel} $\ast$ \hyperlink{structs_8h_a4ff9f4972efcdf9e708efdcf8dab98eb}{create\+\_\+binary\+\_\+pixel} (unsigned char color)
+\item 
+\hyperlink{structImageRGB}{Image\+R\+GB} $\ast$ \hyperlink{structs_8h_a77305d10e2a7bcde208f2713d1f44c6d}{create\+\_\+image\+R\+GB} (int length, int heigth)
+\item 
+\hyperlink{structImageGray}{Image\+Gray} $\ast$ \hyperlink{structs_8h_a1b39580a1c75932a3bb35170110af415}{create\+\_\+image\+Gray} (int length, int heigth)
+\item 
+\hyperlink{structImageBin}{Image\+Bin} $\ast$ \hyperlink{structs_8h_a0f3827999243c3fd3d40c3a08c11d976}{create\+\_\+image\+Bin} (int length, int heigth)
+\item 
+\hyperlink{structImageRGB}{Image\+R\+GB} $\ast$ \hyperlink{structs_8h_a161421b085478c8237d5cb723767b7cf}{read\+\_\+rgb} (char $\ast$file\+\_\+name)
+\item 
+\hyperlink{structImageGray}{Image\+Gray} $\ast$ \hyperlink{structs_8h_a664bc5431900cfc6c3be3432d02d3a55}{read\+\_\+gray} (char $\ast$file\+\_\+name)
+\item 
+\hyperlink{structImageBin}{Image\+Bin} $\ast$ \hyperlink{structs_8h_a002359bede54e79269d1ccae2cfba4b9}{read\+\_\+bin} (char $\ast$file\+\_\+name)
+\item 
+void \hyperlink{structs_8h_ad214f9637e66d1ca560e3122c9c19bab}{write\+\_\+rgb} (\hyperlink{structImageRGB}{Image\+R\+GB} $\ast$image, char $\ast$file\+\_\+name)
+\item 
+void \hyperlink{structs_8h_ab79adb395c229cdd49f5bd66a1afdc66}{write\+\_\+gray} (\hyperlink{structImageGray}{Image\+Gray} $\ast$image)
+\item 
+void \hyperlink{structs_8h_af4170c8dae3db1f9848100550750d154}{write\+\_\+bin} (\hyperlink{structImageBin}{Image\+Bin} $\ast$image)
+\item 
+void \hyperlink{structs_8h_a88298a22ead9b3c95a437a4a92741115}{change\+\_\+rgb\+\_\+intensity} (\hyperlink{structImageRGB}{Image\+R\+GB} $\ast$image, char intensity)
+\item 
+\hyperlink{structImageRGB}{Image\+R\+GB} $\ast$ \hyperlink{structs_8h_a1204c82b42deb4f411e5d5fd0a2b9a1a}{crop} (\hyperlink{structImageRGB}{Image\+R\+GB} $\ast$image, int x1, int y1, int x2, int y2)
+\item 
+void \hyperlink{structs_8h_a71443c26e3e30122a0a2cafd8288cc79}{overlap} (\hyperlink{structImageRGB}{Image\+R\+GB} $\ast$image, \hyperlink{structImageRGB}{Image\+R\+GB} $\ast$\hyperlink{structs_8h_a1204c82b42deb4f411e5d5fd0a2b9a1a}{crop}, int x, int y)
+\item 
+void \hyperlink{structs_8h_a09f28d8a8c6cb15c0f5fc7cc654a78b1}{create\+\_\+water\+\_\+mark} (\hyperlink{structImageRGB}{Image\+R\+GB} $\ast$image, int x, int y)
+\item 
+void \hyperlink{structs_8h_a00e1937fcd00e8494b003c8a7b60dc5d}{invert\+\_\+horizontally} (\hyperlink{structImageRGB}{Image\+R\+GB} $\ast$image)
+\item 
+void \hyperlink{structs_8h_a0387edda93c5e9bece133d31f9d252cb}{invert\+\_\+vertically} (\hyperlink{structImageRGB}{Image\+R\+GB} $\ast$image)
+\item 
+void \hyperlink{structs_8h_ab593061d57f43a2363958286bbdfe92f}{rotate\+\_\+right} (\hyperlink{structImageRGB}{Image\+R\+GB} $\ast$image)
+\item 
+void \hyperlink{structs_8h_ad5815cdbd7a67b8da83a325014879fc0}{rotate\+\_\+left} (\hyperlink{structImageRGB}{Image\+R\+GB} $\ast$image)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{structs_8h_a88298a22ead9b3c95a437a4a92741115}\label{structs_8h_a88298a22ead9b3c95a437a4a92741115}} 
+\index{structs.\+h@{structs.\+h}!change\+\_\+rgb\+\_\+intensity@{change\+\_\+rgb\+\_\+intensity}}
+\index{change\+\_\+rgb\+\_\+intensity@{change\+\_\+rgb\+\_\+intensity}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{change\+\_\+rgb\+\_\+intensity()}{change\_rgb\_intensity()}}
+{\footnotesize\ttfamily void change\+\_\+rgb\+\_\+intensity (\begin{DoxyParamCaption}\item[{\hyperlink{structImageRGB}{Image\+R\+GB} $\ast$}]{image,  }\item[{char}]{intensity }\end{DoxyParamCaption})}
+
+Method to change the intensity of a R\+GB image.
+
+
+\begin{DoxyParams}{Parameters}
+{\em image} & A pointer to the R\+GB image. \\
+\hline
+{\em char} & Intensity value. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structs_8h_a4ff9f4972efcdf9e708efdcf8dab98eb}\label{structs_8h_a4ff9f4972efcdf9e708efdcf8dab98eb}} 
+\index{structs.\+h@{structs.\+h}!create\+\_\+binary\+\_\+pixel@{create\+\_\+binary\+\_\+pixel}}
+\index{create\+\_\+binary\+\_\+pixel@{create\+\_\+binary\+\_\+pixel}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{create\+\_\+binary\+\_\+pixel()}{create\_binary\_pixel()}}
+{\footnotesize\ttfamily \hyperlink{structBinaryPixel}{Binary\+Pixel}$\ast$ create\+\_\+binary\+\_\+pixel (\begin{DoxyParamCaption}\item[{unsigned char}]{color }\end{DoxyParamCaption})}
+
+\hyperlink{structBinaryPixel}{Binary\+Pixel} constructor.
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & An unsigned char with the color value in the first bit. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the created \hyperlink{structBinaryPixel}{Binary\+Pixel} structure. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structs_8h_ad5d8263d5ae4a6854f7da10cadafad4b}\label{structs_8h_ad5d8263d5ae4a6854f7da10cadafad4b}} 
+\index{structs.\+h@{structs.\+h}!create\+\_\+gray\+\_\+pixel@{create\+\_\+gray\+\_\+pixel}}
+\index{create\+\_\+gray\+\_\+pixel@{create\+\_\+gray\+\_\+pixel}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{create\+\_\+gray\+\_\+pixel()}{create\_gray\_pixel()}}
+{\footnotesize\ttfamily \hyperlink{structGrayPixel}{Gray\+Pixel}$\ast$ create\+\_\+gray\+\_\+pixel (\begin{DoxyParamCaption}\item[{unsigned char}]{color }\end{DoxyParamCaption})}
+
+\hyperlink{structGrayPixel}{Gray\+Pixel} constructor.
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & An unsigned char with the color value in grayscale. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the created \hyperlink{structGrayPixel}{Gray\+Pixel} structure. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structs_8h_a0f3827999243c3fd3d40c3a08c11d976}\label{structs_8h_a0f3827999243c3fd3d40c3a08c11d976}} 
+\index{structs.\+h@{structs.\+h}!create\+\_\+image\+Bin@{create\+\_\+image\+Bin}}
+\index{create\+\_\+image\+Bin@{create\+\_\+image\+Bin}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{create\+\_\+image\+Bin()}{create\_imageBin()}}
+{\footnotesize\ttfamily \hyperlink{structImageBin}{Image\+Bin}$\ast$ create\+\_\+image\+Bin (\begin{DoxyParamCaption}\item[{int}]{length,  }\item[{int}]{heigth }\end{DoxyParamCaption})}
+
+Binary image constructor.
+
+
+\begin{DoxyParams}{Parameters}
+{\em length} & Number of columns. \\
+\hline
+{\em heigth} & Number of rows. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the created Binary image structure. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structs_8h_a1b39580a1c75932a3bb35170110af415}\label{structs_8h_a1b39580a1c75932a3bb35170110af415}} 
+\index{structs.\+h@{structs.\+h}!create\+\_\+image\+Gray@{create\+\_\+image\+Gray}}
+\index{create\+\_\+image\+Gray@{create\+\_\+image\+Gray}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{create\+\_\+image\+Gray()}{create\_imageGray()}}
+{\footnotesize\ttfamily \hyperlink{structImageGray}{Image\+Gray}$\ast$ create\+\_\+image\+Gray (\begin{DoxyParamCaption}\item[{int}]{length,  }\item[{int}]{heigth }\end{DoxyParamCaption})}
+
+Grayscale image constructor.
+
+
+\begin{DoxyParams}{Parameters}
+{\em length} & Number of columns. \\
+\hline
+{\em heigth} & Number of rows. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the created Grayscale image structure. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structs_8h_a77305d10e2a7bcde208f2713d1f44c6d}\label{structs_8h_a77305d10e2a7bcde208f2713d1f44c6d}} 
+\index{structs.\+h@{structs.\+h}!create\+\_\+image\+R\+GB@{create\+\_\+image\+R\+GB}}
+\index{create\+\_\+image\+R\+GB@{create\+\_\+image\+R\+GB}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{create\+\_\+image\+R\+G\+B()}{create\_imageRGB()}}
+{\footnotesize\ttfamily \hyperlink{structImageRGB}{Image\+R\+GB}$\ast$ create\+\_\+image\+R\+GB (\begin{DoxyParamCaption}\item[{int}]{length,  }\item[{int}]{heigth }\end{DoxyParamCaption})}
+
+R\+GB image constructor.
+
+
+\begin{DoxyParams}{Parameters}
+{\em length} & Number of columns. \\
+\hline
+{\em heigth} & Number of rows. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the created R\+GB Image structure. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structs_8h_a42d827681977a5262e201b056ae57505}\label{structs_8h_a42d827681977a5262e201b056ae57505}} 
+\index{structs.\+h@{structs.\+h}!create\+\_\+rgb\+\_\+pixel@{create\+\_\+rgb\+\_\+pixel}}
+\index{create\+\_\+rgb\+\_\+pixel@{create\+\_\+rgb\+\_\+pixel}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{create\+\_\+rgb\+\_\+pixel()}{create\_rgb\_pixel()}}
+{\footnotesize\ttfamily \hyperlink{structRGBPixel}{R\+G\+B\+Pixel}$\ast$ create\+\_\+rgb\+\_\+pixel (\begin{DoxyParamCaption}\item[{unsigned char $\ast$}]{rgb }\end{DoxyParamCaption})}
+
+\hyperlink{structRGBPixel}{R\+G\+B\+Pixel} constructor.
+
+
+\begin{DoxyParams}{Parameters}
+{\em rgb} & A pointer to an array with the 3 values in the R\+GB color scheme. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the created \hyperlink{structRGBPixel}{R\+G\+B\+Pixel} structure. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structs_8h_a09f28d8a8c6cb15c0f5fc7cc654a78b1}\label{structs_8h_a09f28d8a8c6cb15c0f5fc7cc654a78b1}} 
+\index{structs.\+h@{structs.\+h}!create\+\_\+water\+\_\+mark@{create\+\_\+water\+\_\+mark}}
+\index{create\+\_\+water\+\_\+mark@{create\+\_\+water\+\_\+mark}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{create\+\_\+water\+\_\+mark()}{create\_water\_mark()}}
+{\footnotesize\ttfamily void create\+\_\+water\+\_\+mark (\begin{DoxyParamCaption}\item[{\hyperlink{structImageRGB}{Image\+R\+GB} $\ast$}]{image,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+Method to create a water mark in an image, givin a starting point.
+
+
+\begin{DoxyParams}{Parameters}
+{\em image} & A pointer to the R\+GB image to place a water mark. \\
+\hline
+{\em x1} & Start position x coordinate. \\
+\hline
+{\em y1} & Start position y coordinate. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structs_8h_a1204c82b42deb4f411e5d5fd0a2b9a1a}\label{structs_8h_a1204c82b42deb4f411e5d5fd0a2b9a1a}} 
+\index{structs.\+h@{structs.\+h}!crop@{crop}}
+\index{crop@{crop}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{crop()}{crop()}}
+{\footnotesize\ttfamily \hyperlink{structImageRGB}{Image\+R\+GB}$\ast$ crop (\begin{DoxyParamCaption}\item[{\hyperlink{structImageRGB}{Image\+R\+GB} $\ast$}]{image,  }\item[{int}]{x1,  }\item[{int}]{y1,  }\item[{int}]{x2,  }\item[{int}]{y2 }\end{DoxyParamCaption})}
+
+Method to crop a R\+GB image, given a starting and an ending points.
+
+
+\begin{DoxyParams}{Parameters}
+{\em image} & A pointer to the R\+GB image. \\
+\hline
+{\em x1} & First pixel x coordinate. \\
+\hline
+{\em y1} & First pixel y coordinate. \\
+\hline
+{\em x2} & Second pixel x coordinate. \\
+\hline
+{\em y2} & Second pixel y coordinate. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structs_8h_a00e1937fcd00e8494b003c8a7b60dc5d}\label{structs_8h_a00e1937fcd00e8494b003c8a7b60dc5d}} 
+\index{structs.\+h@{structs.\+h}!invert\+\_\+horizontally@{invert\+\_\+horizontally}}
+\index{invert\+\_\+horizontally@{invert\+\_\+horizontally}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{invert\+\_\+horizontally()}{invert\_horizontally()}}
+{\footnotesize\ttfamily void invert\+\_\+horizontally (\begin{DoxyParamCaption}\item[{\hyperlink{structImageRGB}{Image\+R\+GB} $\ast$}]{image }\end{DoxyParamCaption})}
+
+Method to invert a R\+GB image horizontally.
+
+
+\begin{DoxyParams}{Parameters}
+{\em image} & A pointer to the R\+GB image that will be inverted. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structs_8h_a0387edda93c5e9bece133d31f9d252cb}\label{structs_8h_a0387edda93c5e9bece133d31f9d252cb}} 
+\index{structs.\+h@{structs.\+h}!invert\+\_\+vertically@{invert\+\_\+vertically}}
+\index{invert\+\_\+vertically@{invert\+\_\+vertically}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{invert\+\_\+vertically()}{invert\_vertically()}}
+{\footnotesize\ttfamily void invert\+\_\+vertically (\begin{DoxyParamCaption}\item[{\hyperlink{structImageRGB}{Image\+R\+GB} $\ast$}]{image }\end{DoxyParamCaption})}
+
+Method to invert a R\+GB image vertically.
+
+
+\begin{DoxyParams}{Parameters}
+{\em image} & A pointer to the R\+GB image that will be inverted. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structs_8h_a71443c26e3e30122a0a2cafd8288cc79}\label{structs_8h_a71443c26e3e30122a0a2cafd8288cc79}} 
+\index{structs.\+h@{structs.\+h}!overlap@{overlap}}
+\index{overlap@{overlap}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{overlap()}{overlap()}}
+{\footnotesize\ttfamily void overlap (\begin{DoxyParamCaption}\item[{\hyperlink{structImageRGB}{Image\+R\+GB} $\ast$}]{image,  }\item[{\hyperlink{structImageRGB}{Image\+R\+GB} $\ast$}]{crop,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+Method verlap a specific area of a R\+GB image with another one smaller, given a starting point.
+
+
+\begin{DoxyParams}{Parameters}
+{\em image} & A pointer to the R\+GB image to be overlapped. \\
+\hline
+{\em crop} & A ponter to the smaller R\+GB image. \\
+\hline
+{\em x} & Start position x coordinate. \\
+\hline
+{\em y} & Start position y coordinate. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structs_8h_a002359bede54e79269d1ccae2cfba4b9}\label{structs_8h_a002359bede54e79269d1ccae2cfba4b9}} 
+\index{structs.\+h@{structs.\+h}!read\+\_\+bin@{read\+\_\+bin}}
+\index{read\+\_\+bin@{read\+\_\+bin}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{read\+\_\+bin()}{read\_bin()}}
+{\footnotesize\ttfamily \hyperlink{structImageBin}{Image\+Bin}$\ast$ read\+\_\+bin (\begin{DoxyParamCaption}\item[{char $\ast$}]{file\+\_\+name }\end{DoxyParamCaption})}
+
+Method to read an image in the P\+PM format and in binary.
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+\_\+name} & Image P\+PM filename. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the created binary image. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structs_8h_a664bc5431900cfc6c3be3432d02d3a55}\label{structs_8h_a664bc5431900cfc6c3be3432d02d3a55}} 
+\index{structs.\+h@{structs.\+h}!read\+\_\+gray@{read\+\_\+gray}}
+\index{read\+\_\+gray@{read\+\_\+gray}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{read\+\_\+gray()}{read\_gray()}}
+{\footnotesize\ttfamily \hyperlink{structImageGray}{Image\+Gray}$\ast$ read\+\_\+gray (\begin{DoxyParamCaption}\item[{char $\ast$}]{file\+\_\+name }\end{DoxyParamCaption})}
+
+Method to read an image in the P\+PM format and in the grayscale color scheme.
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+\_\+name} & Image P\+PM filename. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the created grayscale image. 
+\end{DoxyReturn}
+Variable to store the file type;
+
+Store image dimentions;
+
+Store color range\mbox{\Hypertarget{structs_8h_a161421b085478c8237d5cb723767b7cf}\label{structs_8h_a161421b085478c8237d5cb723767b7cf}} 
+\index{structs.\+h@{structs.\+h}!read\+\_\+rgb@{read\+\_\+rgb}}
+\index{read\+\_\+rgb@{read\+\_\+rgb}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{read\+\_\+rgb()}{read\_rgb()}}
+{\footnotesize\ttfamily \hyperlink{structImageRGB}{Image\+R\+GB}$\ast$ read\+\_\+rgb (\begin{DoxyParamCaption}\item[{char $\ast$}]{file\+\_\+name }\end{DoxyParamCaption})}
+
+Method to read an image in the P\+PM format and in the R\+GB color scheme.
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+\_\+name} & Image P\+PM filename. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the created R\+GB Image. 
+\end{DoxyReturn}
+Variable to store the file type;
+
+Store image dimentions;
+
+Store color range\mbox{\Hypertarget{structs_8h_ad5815cdbd7a67b8da83a325014879fc0}\label{structs_8h_ad5815cdbd7a67b8da83a325014879fc0}} 
+\index{structs.\+h@{structs.\+h}!rotate\+\_\+left@{rotate\+\_\+left}}
+\index{rotate\+\_\+left@{rotate\+\_\+left}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{rotate\+\_\+left()}{rotate\_left()}}
+{\footnotesize\ttfamily void rotate\+\_\+left (\begin{DoxyParamCaption}\item[{\hyperlink{structImageRGB}{Image\+R\+GB} $\ast$}]{image }\end{DoxyParamCaption})}
+
+Method to rotate a R\+GB image 90 degrees.
+
+
+\begin{DoxyParams}{Parameters}
+{\em image} & A pointer to the R\+GB image that will be rotated 90º. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structs_8h_ab593061d57f43a2363958286bbdfe92f}\label{structs_8h_ab593061d57f43a2363958286bbdfe92f}} 
+\index{structs.\+h@{structs.\+h}!rotate\+\_\+right@{rotate\+\_\+right}}
+\index{rotate\+\_\+right@{rotate\+\_\+right}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{rotate\+\_\+right()}{rotate\_right()}}
+{\footnotesize\ttfamily void rotate\+\_\+right (\begin{DoxyParamCaption}\item[{\hyperlink{structImageRGB}{Image\+R\+GB} $\ast$}]{image }\end{DoxyParamCaption})}
+
+Method to rotate a R\+GB image -\/90 degrees.
+
+
+\begin{DoxyParams}{Parameters}
+{\em image} & A pointer to the R\+GB image that will be rotated -\/90º. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structs_8h_af4170c8dae3db1f9848100550750d154}\label{structs_8h_af4170c8dae3db1f9848100550750d154}} 
+\index{structs.\+h@{structs.\+h}!write\+\_\+bin@{write\+\_\+bin}}
+\index{write\+\_\+bin@{write\+\_\+bin}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{write\+\_\+bin()}{write\_bin()}}
+{\footnotesize\ttfamily void write\+\_\+bin (\begin{DoxyParamCaption}\item[{\hyperlink{structImageBin}{Image\+Bin} $\ast$}]{image }\end{DoxyParamCaption})}
+
+Method to save a Binary image in a P\+PM file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em image} & A pointer to the Binary image. \\
+\hline
+{\em file\+\_\+name} & Image P\+PM filename. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structs_8h_ab79adb395c229cdd49f5bd66a1afdc66}\label{structs_8h_ab79adb395c229cdd49f5bd66a1afdc66}} 
+\index{structs.\+h@{structs.\+h}!write\+\_\+gray@{write\+\_\+gray}}
+\index{write\+\_\+gray@{write\+\_\+gray}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{write\+\_\+gray()}{write\_gray()}}
+{\footnotesize\ttfamily void write\+\_\+gray (\begin{DoxyParamCaption}\item[{\hyperlink{structImageGray}{Image\+Gray} $\ast$}]{image }\end{DoxyParamCaption})}
+
+Method to save a Grayscale image in a P\+PM file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em image} & A pointer to the Grayscale image. \\
+\hline
+{\em file\+\_\+name} & Image P\+PM filename. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structs_8h_ad214f9637e66d1ca560e3122c9c19bab}\label{structs_8h_ad214f9637e66d1ca560e3122c9c19bab}} 
+\index{structs.\+h@{structs.\+h}!write\+\_\+rgb@{write\+\_\+rgb}}
+\index{write\+\_\+rgb@{write\+\_\+rgb}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{write\+\_\+rgb()}{write\_rgb()}}
+{\footnotesize\ttfamily void write\+\_\+rgb (\begin{DoxyParamCaption}\item[{\hyperlink{structImageRGB}{Image\+R\+GB} $\ast$}]{image,  }\item[{char $\ast$}]{file\+\_\+name }\end{DoxyParamCaption})}
+
+Method to save a R\+GB image in a P\+PM file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em image} & A pointer to the R\+GB image. \\
+\hline
+{\em file\+\_\+name} & Image P\+PM filename. \\
+\hline
+\end{DoxyParams}
