@@ -259,11 +259,11 @@ ImageBin * read_bin(char *file_name)
     while ((bytesread = fread(needsChar, sizeof(*needsChar), 1, fp)) > 0){
         
         
-        printf("COR NOW TOTAL: %u\n", *needsChar);
+     //   printf("COR NOW TOTAL: %u\n", *needsChar);
         int mediaCor4;
         for (char bit = 7; bit >= 0; bit--){
             temp_color = *needsChar & (1<<bit);
-            printf("cor: %u; bitC= %u, totalSoFar= %d\n", temp_color >> bit, bit, bits_count);
+         //   printf("cor: %u; bitC= %u, totalSoFar= %d\n", temp_color >> bit, bit, bits_count);
             BinaryPixel *temp_pixel = create_binary_pixel(temp_color >> bit);
             image->a[bits_count++] = *temp_pixel;
         } 
@@ -322,9 +322,9 @@ void write_bin(ImageBin *image, char* file_name){
     for (int index = 0; index < image->heigth * image->length; index++ ){
         //TODO : meter o "3" menos hardcocded?
         temp_color |= (image->a[index].color << bit_index--);
-        printf("index: %d, color: %u; bitIndex: %d; tempColor: %u\n", index,image->a[index].color, bit_index, temp_color);
+      //  printf("index: %d, color: %u; bitIndex: %d; tempColor: %u\n", index,image->a[index].color, bit_index, temp_color);
         if (bit_index == -1){
-            printf("atZero, colorFinal: %u\n", temp_color);
+          //  printf("atZero, colorFinal: %u\n", temp_color);
             bit_index = 7;
             fwrite(&temp_color, sizeof(unsigned char), 1, fp);
             temp_color = 0;
@@ -340,7 +340,9 @@ ImageGray* convert_rbgToGray(ImageRGB *image){
     ImageGray* new_image = create_imageGray(image->length, image->heigth);
 
     for (int index = 0; index < image->heigth * image->length; index++){
-        new_image->a[index].color = ((0.3 * image->a[index].rgb[0]) + (0.6 * image->a[index].rgb[0]) + (0.10 * image->a[index].rgb[0]));
+        new_image->a[index].color = ((0.3 * image->a[index].rgb[0]) + (0.6 * image->a[index].rgb[1]) + (0.10 * image->a[index].rgb[3]));
+       // new_image->a[index].color = ( image->a[index].rgb[0] + image->a[index].rgb[1] + image->a[index].rgb[2]) / 3;
+
     }
     return new_image;
 }
@@ -397,6 +399,17 @@ void apply_filter_toRGB(ImageRGB* image, float filter[9]){ // TODO: por malloc, 
 
 }
 
+ImageBin* convert_grayToBin(ImageGray* image, unsigned char threshold){
+     ImageBin* new_image = create_imageBin(image->length, image->heigth);
+     
+    for (int index = 0; index < image->heigth * image->length; index++){
+        new_image->a[index].color =  image->a[index].color > threshold ? 0 : 1;
+    }
+    return new_image;
+
+}
+
+
 // acho que vai ter de ser sumFilterRGB...
 unsigned char sumFilter(ImageRGB *image,float filter[9], int line, int col, char channel){
     int value = 0;
@@ -426,9 +439,12 @@ unsigned char sumFilter(ImageRGB *image,float filter[9], int line, int col, char
 
 int main() 
 {   
-    ImageRGB* imagemR = read_rgb("bike3.ppm");
-    ImageGray* imagemRG = convert_rbgToGray(imagemR);
-    write_gray(imagemRG, "imagemBike.ppm");
+    ImageRGB* imagemColor = read_rgb("lena.ppm");
+    ImageGray* imagemGray = convert_rbgToGray(imagemColor);
+    write_gray(imagemGray, "imagemBike.ppm");
+    ImageBin* imageBin = convert_grayToBin(imagemGray, 127);
+  //  ImageBin* imageBin2 = read_bin("imagemBike.ppm");
+    write_bin(imageBin, "ohyeah.ppm");
     //write_bin(imagemB, "imagemBikenaria.ppm");
     //ImageRGB *imagem2 = read_rgb("lena.ppm"); 
     float filter[9] = {(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9)};
