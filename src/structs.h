@@ -116,6 +116,7 @@ void write_bin(ImageBin* image, char* file_name);
 
 ImageGray* convert_rbgToGray(ImageRGB* image);
 ImageGray* convert_rbgToGrayParametized(ImageRGB* image, char* color);
+ImageBin* convert_grayToBin(ImageGray* image, unsigned char threshold);
 //TODO : aqui devia returnar uma nova ou so aplicar? FAZER PA RGB E GREY
 void apply_filter_toRGB(ImageRGB* image, float filter[9]); //FILTRO de size fixo?
 unsigned char sumFilter(ImageRGB *image,float filter[9], int line, int col, char channel);
