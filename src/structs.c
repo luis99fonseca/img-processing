@@ -281,7 +281,7 @@ void write_rgb(ImageRGB* image, char* file_name){
 
     FILE *fp = fopen(file_name, "w");   
     fprintf(fp, "%s\n", "P6");  //TODO : muda os sizes para coiso dinamico 
-    fprintf(fp, "%d %d\n", image->heigth, image->length);
+    fprintf(fp, "%d %d\n", image->length, image->heigth);
     fprintf(fp, "%s\n", "255"); // TODO: isto devia tar registado tbm
     fclose(fp);
     fp = fopen(file_name, "ab");
@@ -299,7 +299,7 @@ void write_rgb(ImageRGB* image, char* file_name){
 void write_gray(ImageGray *image, char* file_name){
     FILE *fp = fopen(file_name, "w");   
     fprintf(fp, "%s\n", "P5");  //TODO : muda os sizes para coiso dinamico 
-    fprintf(fp, "%d %d\n", image->heigth, image->length);
+    fprintf(fp, "%d %d\n", image->length, image->heigth);
     fprintf(fp, "%s\n", "255"); // TODO: isto devia tar registado tbm
     fclose(fp);
     fp = fopen(file_name, "ab");
@@ -314,7 +314,7 @@ void write_bin(ImageBin *image, char* file_name){
     
     FILE *fp = fopen(file_name, "w");   
     fprintf(fp, "%s\n", "P4"); 
-    fprintf(fp, "%d %d\n", image->heigth, image->length);
+    fprintf(fp, "%d %d\n", image->length, image->heigth);
     fclose(fp);
     fp = fopen(file_name, "ab");
     char bit_index = 7;
@@ -335,7 +335,7 @@ void write_bin(ImageBin *image, char* file_name){
     fclose(fp);
 }
 
-//TODO: ver se meto sem retornar novo objeto!!
+//TODO: ver se meto sem retornar novo objeto!! LOL TEM DE SER
 ImageGray* convert_rbgToGray(ImageRGB *image){
     ImageGray* new_image = create_imageGray(image->length, image->heigth);
 
@@ -426,8 +426,10 @@ unsigned char sumFilter(ImageRGB *image,float filter[9], int line, int col, char
 
 int main() 
 {   
-    ImageBin* imagemB = read_bin("lena4.ppm");
-    write_bin(imagemB, "imagemBinaria.ppm");
+    ImageRGB* imagemR = read_rgb("bike3.ppm");
+    ImageGray* imagemRG = convert_rbgToGray(imagemR);
+    write_gray(imagemRG, "imagemBike.ppm");
+    //write_bin(imagemB, "imagemBikenaria.ppm");
     //ImageRGB *imagem2 = read_rgb("lena.ppm"); 
     float filter[9] = {(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9)};
     float filter2[9] = {-1,-1,-1,
