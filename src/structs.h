@@ -166,7 +166,7 @@ void write_rgb(ImageRGB *image, char* file_name);
  * @param image A pointer to the Grayscale image.
  * @param file_name Image PPM filename.
 */
-void write_gray(ImageGray *image);
+void write_gray(ImageGray *image,  char* file_name);
 
 /**
  * Method to save a Binary image in a PPM file.
@@ -183,6 +183,8 @@ void write_bin(ImageBin *image);
  * @param char Intensity value.
 */
 void change_rgb_intensity(ImageRGB *image, char intensity);
+
+void change_grayscale_intensity(ImageGray *image, char intensity);
 
 /**
  * Method to crop a RGB image, given a starting and an ending points.
@@ -241,3 +243,5 @@ void rotate_right(ImageRGB *image);
  * @param image A pointer to the RGB image that will be rotated 90º.
 */
 void rotate_left(ImageRGB *image);
+
+ImageRGB * shrink_rgb(ImageRGB *image, char ratio);

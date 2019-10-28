@@ -102,7 +102,7 @@ ImageGray * read_gray(char *file_name)
     fscanf(fp, "%d", colorRange);
     printf("%d\n", *colorRange);
 
-    ImageGray* image = create_imageGray(*larg, *comp);  //TODO: nao sei se isto funciona
+    ImageGray* image = create_imageGray(*larg, *comp);  
 
     //END of first lecture (as a ordinary text file)
     long offset = ftell(fp);
@@ -129,7 +129,9 @@ ImageGray * read_gray(char *file_name)
         image->a[bytes_count++] = *temp_pixel;
     }
     printf("[INFO]: %s; BytesCounted: %d", "Done", bytes_count);
-    printf("[TODO]>>> %u", image->a[bytes_count - 1].color);
+    //printf("[TODO]>>> %u", image->a[bytes_count - 1].color);
+
+    return image;
 
 }
 
@@ -240,8 +242,20 @@ void write_rgb(ImageRGB* image, char* file_name){
     
 
 }
-void write_gray(ImageGray *image){
+void write_gray(ImageGray *image,  char* file_name) {
+    FILE *fp = fopen(file_name, "w");   
+    fprintf(fp, "%s\n", "P5");  //TODO : muda os sizes para coiso dinamico 
+    fprintf(fp, "%d %d\n", image->heigth, image->length);
+    fprintf(fp, "%s\n", "255"); // TODO: isto devia tar registado tbm
+    fclose(fp);
+    fp = fopen(file_name, "ab");
+    for (int index = 0; index < image->heigth * image->length; index++ ){
+        fwrite(&image->a[index].color, sizeof(unsigned char), 1, fp);
+        
+    }
+    fclose(fp);
     
+
 }
 void write_bin(ImageBin *image){
 
@@ -266,6 +280,19 @@ void change_rgb_intensity(ImageRGB *image, char intensity)
             
 
         }
+    }
+}
+
+void change_grayscale_intensity(ImageGray *image, char intensity)
+{ 
+    for (int i = 0; i < image->heigth * image->length; i++)
+    {
+        int result = image->a[i].color + intensity;
+
+        if (result < 0) result = 0;
+        if (result > 255) result = 255;
+
+        image->a[i].color = result;
     }
 }
 
@@ -445,4 +472,25 @@ void overlap(ImageRGB *image, ImageRGB *crop, int x, int y)
         }
     }
     printf("\nImage overlap with success!\n");
+}
+
+ImageRGB * shrink_rgb(ImageRGB *image, char ratio)
+{
+    int length = image->length, heigth = image->heigth;
+    int new_length = length * ratio, new_heigth = heigth * ratio;
+
+    ImageRGB* shrink = create_imageRGB(new_length, new_heigth);
+
+    for (int i = 0; i < heigth; i+=ratio)
+    {
+        for (int j = 0; j < length; j+=ratio)
+        {
+            shrink->a[shrink->n].rgb[0] = image->a[i*length + j].rgb[0];
+            shrink->a[shrink->n].rgb[1] = image->a[i*length + j].rgb[1];
+            shrink->a[shrink->n].rgb[2] = image->a[i*length + j].rgb[2];
+            shrink->n++;
+        }
+    }
+
+    return shrink;
 }
