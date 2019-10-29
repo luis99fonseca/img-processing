@@ -5,6 +5,8 @@ MAIN = main.o structs.o
 P1 = p1.o structs.o
 P2 = p2.o structs.o
 P3 = p3.o structs.o
+P4 = p4.o structs.o
+P5 = p5.o structs.o
 LIBS=-lm
 
 %.o: %.c $(DEPS)
@@ -22,6 +24,11 @@ p2: $(P2)
 p3: $(P3)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
+p4: $(P4)
+	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
+
+p5: $(P5)
+	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 .PHONY: clean
 

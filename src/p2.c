@@ -12,6 +12,6 @@ int main()
     printf("\nConverted image with success!\n");
 
     printf("\nSaving new grayscale image to a file...\n");
-    write_gray(gray_image, "../out/gray_image.ppm");
+    write_gray(gray_image, "../out/p2.ppm");
     printf("\nImage saved with sucess!\n");
 }
