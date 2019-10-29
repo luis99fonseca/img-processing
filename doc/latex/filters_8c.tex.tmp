@@ -1,94 +1,100 @@
-\hypertarget{filters_8c}{}\section{src/filters.c File Reference}
-\label{filters_8c}\index{src/filters.\+c@{src/filters.\+c}}
+\hypertarget{filters_8c}{}\doxysection{src/filters.c File Reference}
+\label{filters_8c}\index{src/filters.c@{src/filters.c}}
 This graph shows which files directly or indirectly include this file\+:
 % FIG 0
-\subsection*{Variables}
+\doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-float \hyperlink{filters_8c_a7ce0e9f5115e96a802dcc14f9cf71712}{edge\+Detection1} \mbox{[}9\mbox{]}
+float \mbox{\hyperlink{filters_8c_a7ce0e9f5115e96a802dcc14f9cf71712}{edge\+Detection1}} \mbox{[}9\mbox{]}
 \item 
-float \hyperlink{filters_8c_a0ed32f31b89a242e44c62d4f0c9539bf}{edge\+Detection2} \mbox{[}9\mbox{]}
+float \mbox{\hyperlink{filters_8c_a0ed32f31b89a242e44c62d4f0c9539bf}{edge\+Detection2}} \mbox{[}9\mbox{]}
 \item 
-float \hyperlink{filters_8c_a31dc9f52a20d519f0cd9925f2ce78811}{edge\+Detection3} \mbox{[}9\mbox{]}
+float \mbox{\hyperlink{filters_8c_a31dc9f52a20d519f0cd9925f2ce78811}{edge\+Detection3}} \mbox{[}9\mbox{]}
 \item 
-float \hyperlink{filters_8c_a8bf53b4a1fdc2723570ea75ddd1bfee9}{sharpen} \mbox{[}9\mbox{]}
+float \mbox{\hyperlink{filters_8c_a8bf53b4a1fdc2723570ea75ddd1bfee9}{sharpen}} \mbox{[}9\mbox{]}
 \item 
-float \hyperlink{filters_8c_a8c27d8e192cbf12e98859f8c15d59ced}{box\+Blur} \mbox{[}9\mbox{]}
+float \mbox{\hyperlink{filters_8c_a8c27d8e192cbf12e98859f8c15d59ced}{box\+Blur}} \mbox{[}9\mbox{]}
 \item 
-float \hyperlink{filters_8c_a3c33ebe9c4f088378906437b2069a5b2}{gaussian\+Blur} \mbox{[}9\mbox{]}
+float \mbox{\hyperlink{filters_8c_a3c33ebe9c4f088378906437b2069a5b2}{gaussian\+Blur}} \mbox{[}9\mbox{]}
 \end{DoxyCompactItemize}
 
 
-\subsection{Variable Documentation}
+\doxysubsection{Variable Documentation}
 \mbox{\Hypertarget{filters_8c_a8c27d8e192cbf12e98859f8c15d59ced}\label{filters_8c_a8c27d8e192cbf12e98859f8c15d59ced}} 
-\index{filters.\+c@{filters.\+c}!box\+Blur@{box\+Blur}}
-\index{box\+Blur@{box\+Blur}!filters.\+c@{filters.\+c}}
-\subsubsection{\texorpdfstring{box\+Blur}{boxBlur}}
+\index{filters.c@{filters.c}!boxBlur@{boxBlur}}
+\index{boxBlur@{boxBlur}!filters.c@{filters.c}}
+\doxysubsubsection{\texorpdfstring{boxBlur}{boxBlur}}
 {\footnotesize\ttfamily float box\+Blur\mbox{[}9\mbox{]}}
 
 {\bfseries Initial value\+:}
-\begin{DoxyCode}
-= \{ 1.0/9, 1.0/9, 1.0/9,
-                    1.0/9, 1.0/9, 1.0/9,
-                    1.0/9, 1.0/9, 1.0/9\}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{ 1.0/9, 1.0/9, 1.0/9,}
+\DoxyCodeLine{                    1.0/9, 1.0/9, 1.0/9,}
+\DoxyCodeLine{                    1.0/9, 1.0/9, 1.0/9\}}
+
 \end{DoxyCode}
 \mbox{\Hypertarget{filters_8c_a7ce0e9f5115e96a802dcc14f9cf71712}\label{filters_8c_a7ce0e9f5115e96a802dcc14f9cf71712}} 
-\index{filters.\+c@{filters.\+c}!edge\+Detection1@{edge\+Detection1}}
-\index{edge\+Detection1@{edge\+Detection1}!filters.\+c@{filters.\+c}}
-\subsubsection{\texorpdfstring{edge\+Detection1}{edgeDetection1}}
+\index{filters.c@{filters.c}!edgeDetection1@{edgeDetection1}}
+\index{edgeDetection1@{edgeDetection1}!filters.c@{filters.c}}
+\doxysubsubsection{\texorpdfstring{edgeDetection1}{edgeDetection1}}
 {\footnotesize\ttfamily float edge\+Detection1\mbox{[}9\mbox{]}}
 
 {\bfseries Initial value\+:}
-\begin{DoxyCode}
-= \{ 1, 0, -1,
-                            0, 0, 0,
-                            -1, 0, 1\}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{ 1, 0, -\/1,}
+\DoxyCodeLine{                            0, 0, 0,}
+\DoxyCodeLine{                            -\/1, 0, 1\}}
+
 \end{DoxyCode}
 \mbox{\Hypertarget{filters_8c_a0ed32f31b89a242e44c62d4f0c9539bf}\label{filters_8c_a0ed32f31b89a242e44c62d4f0c9539bf}} 
-\index{filters.\+c@{filters.\+c}!edge\+Detection2@{edge\+Detection2}}
-\index{edge\+Detection2@{edge\+Detection2}!filters.\+c@{filters.\+c}}
-\subsubsection{\texorpdfstring{edge\+Detection2}{edgeDetection2}}
+\index{filters.c@{filters.c}!edgeDetection2@{edgeDetection2}}
+\index{edgeDetection2@{edgeDetection2}!filters.c@{filters.c}}
+\doxysubsubsection{\texorpdfstring{edgeDetection2}{edgeDetection2}}
 {\footnotesize\ttfamily float edge\+Detection2\mbox{[}9\mbox{]}}
 
 {\bfseries Initial value\+:}
-\begin{DoxyCode}
-= \{ 0, 1, 0,
-                            1, -4, 1,
-                            0, 1, 0\}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{ 0, 1, 0,}
+\DoxyCodeLine{                            1, -\/4, 1,}
+\DoxyCodeLine{                            0, 1, 0\}}
+
 \end{DoxyCode}
 \mbox{\Hypertarget{filters_8c_a31dc9f52a20d519f0cd9925f2ce78811}\label{filters_8c_a31dc9f52a20d519f0cd9925f2ce78811}} 
-\index{filters.\+c@{filters.\+c}!edge\+Detection3@{edge\+Detection3}}
-\index{edge\+Detection3@{edge\+Detection3}!filters.\+c@{filters.\+c}}
-\subsubsection{\texorpdfstring{edge\+Detection3}{edgeDetection3}}
+\index{filters.c@{filters.c}!edgeDetection3@{edgeDetection3}}
+\index{edgeDetection3@{edgeDetection3}!filters.c@{filters.c}}
+\doxysubsubsection{\texorpdfstring{edgeDetection3}{edgeDetection3}}
 {\footnotesize\ttfamily float edge\+Detection3\mbox{[}9\mbox{]}}
 
 {\bfseries Initial value\+:}
-\begin{DoxyCode}
-= \{ -1, -1, -1,
-                            -1, 8, -1,
-                            -1, -1, -1\}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{ -\/1, -\/1, -\/1,}
+\DoxyCodeLine{                            -\/1, 8, -\/1,}
+\DoxyCodeLine{                            -\/1, -\/1, -\/1\}}
+
 \end{DoxyCode}
 \mbox{\Hypertarget{filters_8c_a3c33ebe9c4f088378906437b2069a5b2}\label{filters_8c_a3c33ebe9c4f088378906437b2069a5b2}} 
-\index{filters.\+c@{filters.\+c}!gaussian\+Blur@{gaussian\+Blur}}
-\index{gaussian\+Blur@{gaussian\+Blur}!filters.\+c@{filters.\+c}}
-\subsubsection{\texorpdfstring{gaussian\+Blur}{gaussianBlur}}
+\index{filters.c@{filters.c}!gaussianBlur@{gaussianBlur}}
+\index{gaussianBlur@{gaussianBlur}!filters.c@{filters.c}}
+\doxysubsubsection{\texorpdfstring{gaussianBlur}{gaussianBlur}}
 {\footnotesize\ttfamily float gaussian\+Blur\mbox{[}9\mbox{]}}
 
 {\bfseries Initial value\+:}
-\begin{DoxyCode}
-= \{ 1.0/16, 1.0/8, 1.0/16,
-                        1.0/8, 1.0/4, 1.0/8,
-                        1.0/16, 1.0/8, 1.0/16\}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{ 1.0/16, 1.0/8, 1.0/16,}
+\DoxyCodeLine{                        1.0/8, 1.0/4, 1.0/8,}
+\DoxyCodeLine{                        1.0/16, 1.0/8, 1.0/16\}}
+
 \end{DoxyCode}
 \mbox{\Hypertarget{filters_8c_a8bf53b4a1fdc2723570ea75ddd1bfee9}\label{filters_8c_a8bf53b4a1fdc2723570ea75ddd1bfee9}} 
-\index{filters.\+c@{filters.\+c}!sharpen@{sharpen}}
-\index{sharpen@{sharpen}!filters.\+c@{filters.\+c}}
-\subsubsection{\texorpdfstring{sharpen}{sharpen}}
+\index{filters.c@{filters.c}!sharpen@{sharpen}}
+\index{sharpen@{sharpen}!filters.c@{filters.c}}
+\doxysubsubsection{\texorpdfstring{sharpen}{sharpen}}
 {\footnotesize\ttfamily float sharpen\mbox{[}9\mbox{]}}
 
 {\bfseries Initial value\+:}
-\begin{DoxyCode}
-= \{ 0, -1, 0,
-                    -1, 5, -1,
-                    0, -1, 0\}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{ 0, -\/1, 0,}
+\DoxyCodeLine{                    -\/1, 5, -\/1,}
+\DoxyCodeLine{                    0, -\/1, 0\}}
+
 \end{DoxyCode}

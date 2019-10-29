@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['imagebin',['ImageBin',['../structImageBin.html',1,'']]],
-  ['imagegray',['ImageGray',['../structImageGray.html',1,'']]],
-  ['imagergb',['ImageRGB',['../structImageRGB.html',1,'']]]
+  ['imagebin_78',['ImageBin',['../structImageBin.html',1,'']]],
+  ['imagegray_79',['ImageGray',['../structImageGray.html',1,'']]],
+  ['imagergb_80',['ImageRGB',['../structImageRGB.html',1,'']]]
 ];

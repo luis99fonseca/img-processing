@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['binarypixel',['BinaryPixel',['../structBinaryPixel.html',1,'']]]
+  ['binarypixel_76',['BinaryPixel',['../structBinaryPixel.html',1,'']]]
 ];
