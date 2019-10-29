@@ -4,6 +4,7 @@
 int main() 
 {
     ImageRGB* image = read_rgb("../img/lena.ppm");
-    ImageRGB* expanded = expand(image, 2);
-    write_rgb(expanded, "../out/expanded.ppm");
+    ImageGray* gray = convert_rbgToGray(image);
+    grayscale_water_mark(gray, 100, 100);
+    write_gray(gray, "../out/gray_watermark.ppm");
 }
