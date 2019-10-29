@@ -185,6 +185,12 @@ void write_bin(ImageBin *image, char* file_name);
 */
 void change_rgb_intensity(ImageRGB *image, char intensity);
 
+/**
+ * Method to change the intensity of a Grayscale image.
+ * 
+ * @param image A pointer to the Grayscale image.
+ * @param char Intensity value. 
+*/
 void change_grayscale_intensity(ImageGray *image, char intensity);
 
 /**
@@ -245,7 +251,9 @@ void rotate_right(ImageRGB *image);
 */
 void rotate_left(ImageRGB *image);
 
+
 ImageRGB * shrink_rgb(ImageRGB *image, char ratio);
+ImageRGB * expand(ImageRGB *image, char ratio);
 
 
 ImageGray* convert_rbgToGray(ImageRGB* image);
