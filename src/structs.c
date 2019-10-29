@@ -287,6 +287,7 @@ void write_rgb(ImageRGB* image, char* file_name){
     fp = fopen(file_name, "ab");
     for (int index = 0; index < image->heigth * image->length; index++ ){
         //TODO : meter o "3" menos hardcocded?
+       // printf("ola -> %d\n", index);
         for (int color = 0; color < 3; color++){
             fwrite(&image->a[index].rgb[color], sizeof(unsigned char), 1, fp);
         }
@@ -607,21 +608,31 @@ ImageGray* convert_rbgToGrayParametized(ImageRGB* image, char* color){
     return new_image;
 
 }
+ImageBin* convert_grayToBin(ImageGray* image, unsigned char threshold){
+     ImageBin* new_image = create_imageBin(image->length, image->heigth);
+     
+    for (int index = 0; index < image->heigth * image->length; index++){
+        new_image->a[index].color =  image->a[index].color > threshold ? 0 : 1;
+    }
+    return new_image;
 
+}
 void apply_filter_toRGB(ImageRGB* image, float filter[9]){ // TODO: por malloc, pa n inicizalizar
-    RGBPixel *temp_a = (RGBPixel *)malloc(image->length * image->heigth * sizeof(GrayPixel));
+    RGBPixel *temp_a = (RGBPixel *)malloc(image->length * image->heigth * sizeof(RGBPixel));
+    
     int total_cols = image->length;
     int count = 0;
     //TODO: eventualmente nao meter o if no meio, e depois no fim atualizar esses valores pa serem iguais ao do cenas original
     for (int line = 0; line < image->heigth; line++){
         for (int col = 0; col < image->length; col++){
-          //  printf(">>>line: %d, col: %d; %d  de %d\n",line, col, line *  total_cols + col, image->length * image->heigth);
-            if (line == 0 || line == image->heigth - 1 || col == 0 || col == image->heigth - 1 ){
+           // printf(">>>line: %d, col: %d; %d  de %d\n",line, col, line *  total_cols + col, image->length * image->heigth);
+            if (line == 0 || line == (image->heigth - 1) || col == 0 || col == (image->length - 1) ){
               //  printf("<<< %s", "im in\n");
+                count++;
                 temp_a[line *  total_cols + col] = image->a[line *  total_cols + col];
             } else {
             //    printf("--- %s", "seg fodeu\n");
-                count++;
+               // count++;
               //  printf("\n");
                 for (int color = 0; color < 3; color++){     
                     temp_a[line *  total_cols + col].rgb[color] = sumFilter(image, filter, line, col, color);                    
@@ -633,26 +644,16 @@ void apply_filter_toRGB(ImageRGB* image, float filter[9]){ // TODO: por malloc, 
         }
     }
     //free(image->a);
+    printf("\ncontagem: %d\n", count);
     image->a = temp_a;
 
 }
-
-ImageBin* convert_grayToBin(ImageGray* image, unsigned char threshold){
-     ImageBin* new_image = create_imageBin(image->length, image->heigth);
-     
-    for (int index = 0; index < image->heigth * image->length; index++){
-        new_image->a[index].color =  image->a[index].color > threshold ? 0 : 1;
-    }
-    return new_image;
-
-}
-
 
 // acho que vai ter de ser sumFilterRGB...
 unsigned char sumFilter(ImageRGB *image,float filter[9], int line, int col, char channel){
     int value = 0;
     int temp_value;
-  // printf(":: %s L=%d, C=%d\n","at sumFilter:",line,col);
+  //  printf(":: %s L=%d, C=%d\n","at sumFilter:",line,col);
     for (int temp_line = -1 ; temp_line <= 1; temp_line++){
         for (int temp_col = - 1; temp_col <= 1; temp_col++){  
            // printf(" ||| line: %d, col: %d; indexA: %d, indexB: %d\n", (temp_line + line), (temp_col + col), (temp_line + line) * image->length + (temp_col + col), (temp_line + 1) * 3 + (temp_col + 1));                                                           //TODO : hardcoded here
@@ -677,31 +678,12 @@ unsigned char sumFilter(ImageRGB *image,float filter[9], int line, int col, char
 
 int main() 
 {   
-    ImageRGB* imagemColor = read_rgb("lena.ppm");
-    ImageGray* imagemGray = convert_rbgToGray(imagemColor);
-    write_gray(imagemGray, "imagemBike.ppm");
-    ImageBin* imageBin = convert_grayToBin(imagemGray, 127);
-  //  ImageBin* imageBin2 = read_bin("imagemBike.ppm");
-    write_bin(imageBin, "ohyeah.ppm");
-    //write_bin(imagemB, "imagemBikenaria.ppm");
-    //ImageRGB *imagem2 = read_rgb("lena.ppm"); 
-    float filter[9] = {(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9)};
-    float filter2[9] = {-1,-1,-1,
-                        -1,8,-1,
-                        -1,-1,-1};
-    /* apply_filter_toRGB(imagem2, filter);
-    write_rgb(imagem2, "filtros3.ppm"); */
-
-
-    /* ImageGray* imagem = read_gray("lena2.ppm");
-    write_gray(imagem, "ola2.ppm");  */
-   /*  ImageGray* imagem3 = convert_rbgToGray(imagem2);
-    write_gray(imagem3, "adeus2.ppm"); */
-    /* ImageGray* imagemR = convert_rbgToGrayParametized(imagem2, "Red");
-    ImageGray* imagemG = convert_rbgToGrayParametized(imagem2, "Green");
-    ImageGray* imagemB = convert_rbgToGrayParametized(imagem2, "Blue");
-    write_gray(imagemR, "colorR.ppm");
-    write_gray(imagemG, "colorG.ppm");
-    write_gray(imagemB, "colorB.ppm"); */
+    ImageRGB* imagemColor = read_rgb("bike3.ppm");
+    float filter2[9] = {-1, -1, -1,
+                        -1,  8, -1,
+                        -1, -1, -1};
+   /*  write_rgb(imagemColor, "testeCenas.ppm"); */
+    apply_filter_toRGB(imagemColor, filter2);
+    write_rgb(imagemColor, "filtroteste.ppm"); 
 
 }
