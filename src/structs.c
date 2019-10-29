@@ -997,26 +997,15 @@ unsigned char sumFilterGray(ImageGray *image,float filter[9], int line, int col)
 int main() 
 {   
     printf("\nLoading first RGB image...\n");
-    ImageRGB* i1 = read_rgb("../img/bike3.ppm");
+    ImageRGB* i1 = read_rgb("../img/lena.ppm");
     printf("\nImage load with success!\n");
 
-    printf("\nConverting first image to grayscale...\n");
-    ImageGray* gray_image = convert_rbgToGray(i1);
-    printf("\nConverted image with success!\n");
 
-    printf("\nApplying filter to RGB image...\n");
-    apply_filter_toRGB(i1, edgeDetection1);
+    ImageRGB* i2 = crop_rgb(i1, 225, 230, 400, 400);
+    apply_filter_toRGB(i2,edgeDetection2);
+    overlap_rgb(i1, i2, 225, 230);
 
-    printf("\nSaving new RGB image to a file...\n");
-    write_rgb(i1, "../out/p06-1.ppm");
-    printf("\nImage saved with sucess!\n");
-
-    printf("\nApplying filter to Grayscale image...\n");
-    apply_filter_toGray(gray_image, edgeDetection1);
-
-    printf("\nSaving new grayscale image to a file...\n");
-    write_gray(gray_image, "../out/p06-2.ppm");
-    printf("\nImage saved with sucess!\n");
+    write_rgb(i1, "../out/p07-1.ppm");
 
 
 
