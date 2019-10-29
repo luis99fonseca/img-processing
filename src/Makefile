@@ -7,6 +7,10 @@ P2 = p2.o structs.o
 P3 = p3.o structs.o
 P4 = p4.o structs.o
 P5 = p5.o structs.o
+P8 = p8.o structs.o
+P9 = p9.o structs.o
+P10 = p10.o structs.o
+
 LIBS=-lm
 
 %.o: %.c $(DEPS)
@@ -29,6 +33,15 @@ p4: $(P4)
 
 p5: $(P5)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
+
+p8: $(P8)
+	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
+
+p9: $(P9)
+	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
+
+p10: $(P10)
+	 $(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 .PHONY: clean
 
