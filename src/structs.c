@@ -993,7 +993,7 @@ unsigned char sumFilterGray(ImageGray *image,float filter[9], int line, int col)
     return (unsigned char) value;
 }
 
-/* 
+/*
 int main() 
 {   
     printf("\nLoading first RGB image...\n");
@@ -1009,4 +1009,5 @@ int main()
 
 
 
-} */
+}
+*/
