@@ -346,7 +346,9 @@ ImageGray * grayscale_expand(ImageGray *image, char ratio);
 ImageGray* convert_rbgToGray(ImageRGB* image);
 ImageGray* convert_rbgToGrayParametized(ImageRGB* image, char* color);
 ImageBin* convert_grayToBin(ImageGray* image, unsigned char threshold);
-//TODO : aqui devia returnar uma nova ou so aplicar? FAZER PA RGB E GREY
-void apply_filter_toRGB(ImageRGB* image, float filter[9]); //FILTRO de size fixo?
-unsigned char sumFilter(ImageRGB *image,float filter[9], int line, int col, char channel);
+
+void apply_filter_toRGB(ImageRGB* image, float filter[9]);
+unsigned char sumFilterRGB(ImageRGB *image,float filter[9], int line, int col, char channel);
+void apply_filter_toGray(ImageGray* image, float filter[9]);
+unsigned char sumFilterGray(ImageGray *image,float filter[9], int line, int col);
 
