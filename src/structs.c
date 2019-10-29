@@ -347,11 +347,9 @@ void change_rgb_intensity(ImageRGB *image, char intensity)
         for (int color = 0; color < 3; color++)
         {   
             int result = image->a[i].rgb[color] + intensity;
-            if (result < 0)
-                result = 0;
-
-            if (result > 255)
-                result = 255;
+            
+            if (result < 0) result = 0;
+            if (result > 255) result = 255;
             
             // because there is no overflow on the result, we can cast int to unsigned int directly
             image->a[i].rgb[color] = result;
@@ -359,6 +357,8 @@ void change_rgb_intensity(ImageRGB *image, char intensity)
 
         }
     }
+
+    printf("\nChanged image intensity with sucess!\n");
 }
 
 void change_grayscale_intensity(ImageGray *image, char intensity)
@@ -372,9 +372,10 @@ void change_grayscale_intensity(ImageGray *image, char intensity)
 
         image->a[i].color = result;
     }
+    printf("\nChanged image intensity with sucess!\n");
 }
 
-ImageRGB * crop(ImageRGB *image, int x1, int y1, int x2, int y2)
+ImageRGB * crop_rgb(ImageRGB *image, int x1, int y1, int x2, int y2)
 {
     int total_length = image->length, total_heigth = image->heigth;
 
@@ -401,10 +402,40 @@ ImageRGB * crop(ImageRGB *image, int x1, int y1, int x2, int y2)
         }
     }
 
+    printf("\nCropped image with sucess!\n");
     return cropedImage;
 }
 
-void create_water_mark(ImageRGB *image, int x, int y)
+ImageGray * crop_grayscale(ImageGray *image, int x1, int y1, int x2, int y2)
+{
+    int total_length = image->length, total_heigth = image->heigth;
+
+    int new_heigth = y2 - y1;
+    int new_length = x2 - x1;
+
+    ImageGray* cropedImage = create_imageGray(new_length, new_heigth);  
+
+    if (x1 < 0 || y1 < 0 || x2 < 0 || y2 < 0 
+        || x1 > total_length || x2 > total_length
+        || y1 > total_heigth || y2 > total_heigth)
+    {
+        printf("\nInvalid crop area.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    for (int y = 0; y < new_heigth; y++)
+    {
+        for (int x = 0; x < new_length; x++)
+        {   
+            cropedImage->a[y*new_length + x].color = image->a[(y1+y)*total_length + (x1+x)].color;
+        }
+    }
+
+    printf("\nCropped image with sucess!\n");
+    return cropedImage;
+}
+
+void rgb_water_mark(ImageRGB *image, int x, int y)
 {   
     int total_length = image->length, total_heigth = image->heigth;
 
@@ -435,7 +466,34 @@ void create_water_mark(ImageRGB *image, int x, int y)
     printf("\nPlaced watermark with success!\n");
 }
 
-void invert_vertically(ImageRGB *image) 
+void grayscale_water_mark(ImageGray *image, int x, int y)
+{   
+    int total_length = image->length, total_heigth = image->heigth;
+
+    ImageGray* water_mark = convert_rbgToGray(read_rgb("../img/water_mark.ppm"));
+
+    int water_mark_length = water_mark->length;
+    int water_mark_heigth = water_mark->heigth;
+
+    
+    if (x < 0 || y < 0 || x > total_length - water_mark_length + 1 || y > total_heigth - water_mark_heigth)
+    {
+        printf("\nInvalid watermark placement.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    for (int i = 0; i < water_mark_heigth /*&& i + y < total_heigth*/; i++)
+    {
+        for (int j = 0; j < water_mark_length - 1 /*&& j + x < total_length*/; j++)
+        {
+            double r1 = round(image->a[(y+i)*total_length + (x+j)].color * 0.60) +  round(water_mark->a[i*water_mark_length + j].color * 0.40);
+            image->a[(y+i)*total_length + (x+j)].color = r1 <= 255 ? r1 : 255; 
+        }
+    }
+    printf("\nPlaced watermark with success!\n");
+}
+
+void rgb_invert_vertically(ImageRGB *image) 
 {
 
     int length = image->length, heigth = image->heigth;
@@ -458,7 +516,28 @@ void invert_vertically(ImageRGB *image)
     printf("\nInverted image vertically with success!\n");
 }
 
-void invert_horizontally(ImageRGB *image) 
+void grayscale_invert_vertically(ImageGray *image) 
+{
+
+    int length = image->length, heigth = image->heigth;
+
+    GrayPixel* inverted =(GrayPixel *)malloc(length * heigth * sizeof(GrayPixel));
+    
+    int n = 0;
+    for (int i = 0; i < heigth; i++)
+    {
+        for (int j = length - 1; j >= 0; j--) 
+        {
+            inverted[n].color = image->a[i*length + j].color;
+            n++;
+        }
+    }
+
+    image->a = inverted;
+    printf("\nInverted image vertically with success!\n");
+}
+
+void rgb_invert_horizontally(ImageRGB *image) 
 {
 
     int length = image->length, heigth = image->heigth;
@@ -481,7 +560,28 @@ void invert_horizontally(ImageRGB *image)
     printf("\nInverted image horizontally with success!\n");
 }
 
-void rotate_left(ImageRGB *image)
+void grayscale_invert_horizontally(ImageGray *image) 
+{
+
+    int length = image->length, heigth = image->heigth;
+
+    GrayPixel* inverted =(GrayPixel *)malloc(length * heigth * sizeof(GrayPixel));
+    
+    int n = 0;
+    for (int i = heigth - 1; i >= 0; i--)
+    {
+        for (int j = 0; j < length; j++) 
+        {
+            inverted[n].color = image->a[i*length + j].color;
+            n++;
+        }
+    }
+
+    image->a = inverted;
+    printf("\nInverted image horizontally with success!\n");
+}
+
+void rgb_rotate_left(ImageRGB *image)
 {
     int length = image->length, heigth = image->heigth;
 
@@ -504,7 +604,28 @@ void rotate_left(ImageRGB *image)
 
 }
 
-void rotate_right(ImageRGB *image) 
+void grayscale_rotate_left(ImageGray *image)
+{
+    int length = image->length, heigth = image->heigth;
+
+    GrayPixel* inverted =(GrayPixel *)malloc(length * heigth * sizeof(GrayPixel));
+
+    int n = 0;
+    for (int j = length - 1; j >= 0; j--)
+    {
+        for (int i = 0; i < heigth; i++)
+        {
+            inverted[n].color = image->a[i*length + j].color;
+            n++;
+        }
+    }
+
+    image->a = inverted;
+    printf("\nRotated image 90º with success!\n");
+
+}
+
+void rgb_rotate_right(ImageRGB *image) 
 {
     int length = image->length, heigth = image->heigth;
 
@@ -526,8 +647,28 @@ void rotate_right(ImageRGB *image)
     printf("\nRotated image -90º with success!\n");
 }
 
+void grayscale_rotate_right(ImageGray *image) 
+{
+    int length = image->length, heigth = image->heigth;
 
-void overlap(ImageRGB *image, ImageRGB *crop, int x, int y)
+    GrayPixel* inverted =(GrayPixel *)malloc(length * heigth * sizeof(GrayPixel));
+
+    int n = 0;
+    for (int j = 0; j < length; j++)
+    {
+        for (int i = heigth - 1; i >= 0; i--)
+        {
+            inverted[n].color = image->a[i*length + j].color;
+            n++;
+        }
+    }
+    
+    image->a = inverted;
+    printf("\nRotated image -90º with success!\n");
+}
+
+
+void overlap_rgb(ImageRGB *image, ImageRGB *crop, int x, int y)
 {
     int total_length = image->length, total_heigth = image->heigth;
 
@@ -552,10 +693,33 @@ void overlap(ImageRGB *image, ImageRGB *crop, int x, int y)
     printf("\nImage overlap with success!\n");
 }
 
-ImageRGB * shrink_rgb(ImageRGB *image, char ratio)
+void overlap_grayscale(ImageGray *image, ImageGray *crop, int x, int y)
+{
+    int total_length = image->length, total_heigth = image->heigth;
+
+    int crop_length = crop->length, crop_heigth = crop->heigth;
+
+    if (x < 0 || y < 0 || x > total_length - crop_length + 1 || y > total_heigth - crop_heigth)
+    {
+        printf("\nInvalid overlap.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    for (int i = 0; i < crop_heigth /*&& i + y < total_heigth*/; i++)
+    {
+        for (int j = 0; j < crop_length - 1 /*&& j + x < total_length*/; j++)
+        {
+            image->a[(y+i)*total_length + (x+j)].color = crop->a[i*crop_length + j].color;
+        
+        }
+    }
+    printf("\nImage overlap with success!\n");
+}
+
+ImageRGB * rgb_reduce(ImageRGB *image, char ratio)
 {
     int length = image->length, heigth = image->heigth;
-    int new_length = length * ratio, new_heigth = heigth * ratio;
+    int new_length = length / ratio, new_heigth = heigth / ratio;
 
     ImageRGB* shrink = create_imageRGB(new_length, new_heigth);
 
@@ -570,7 +734,96 @@ ImageRGB * shrink_rgb(ImageRGB *image, char ratio)
         }
     }
     
+    printf("\nImage reduced with success!\n");
     return shrink;
+}
+
+ImageGray * grayscale_reduce(ImageGray *image, char ratio)
+{
+    int length = image->length, heigth = image->heigth;
+    int new_length = length / ratio, new_heigth = heigth / ratio;
+
+    ImageGray* shrink = create_imageGray(new_length, new_heigth);
+
+    for (int i = 0; i < heigth; i+=ratio)
+    {
+        for (int j = 0; j < length; j+=ratio)
+        {
+            shrink->a[shrink->n].color = image->a[i*length + j].color;
+            shrink->n++;
+        }
+    }
+    
+    printf("\nImage reduced with success!\n");
+    return shrink;
+}
+
+ImageRGB * rgb_expand(ImageRGB *image, char ratio)
+{
+    int length = image->length, heigth = image->heigth;
+    int new_length = length * ratio, new_heigth = heigth * ratio;
+
+    ImageRGB* expand = create_imageRGB(new_length, new_heigth);
+
+    for (int i = 0; i < heigth; i++)
+    {
+        for (int j = 0; j < length; j++)
+        {
+            for (int r = 0; r < ratio; r++)
+            {
+                expand->a[expand->n].rgb[0] = image->a[i*length + j].rgb[0];
+                expand->a[expand->n].rgb[1] = image->a[i*length + j].rgb[1];
+                expand->a[expand->n].rgb[2] = image->a[i*length + j].rgb[2];
+                expand->n++;
+            }
+            
+        }
+
+        for(int r = 0; r < ratio - 1; r++)
+        {
+            for (int copy = 0; copy < new_length; copy++)
+            {
+                expand->a[expand->n].rgb[0] = expand->a[expand->n - new_length].rgb[0];
+                expand->a[expand->n].rgb[1] = expand->a[expand->n - new_length].rgb[1];
+                expand->a[expand->n].rgb[2] = expand->a[expand->n - new_length].rgb[2];
+                expand->n++;
+            }
+        }
+    }
+    printf("\nImage expanded with success!\n");
+    return expand;
+}
+
+ImageGray * grayscale_expand(ImageGray *image, char ratio)
+{
+    int length = image->length, heigth = image->heigth;
+    int new_length = length * ratio, new_heigth = heigth * ratio;
+
+    ImageGray* expand = create_imageGray(new_length, new_heigth);
+
+    for (int i = 0; i < heigth; i++)
+    {
+        for (int j = 0; j < length; j++)
+        {
+            for (int r = 0; r < ratio; r++)
+            {
+                expand->a[expand->n].color = image->a[i*length + j].color;
+                expand->n++;
+            }
+            
+        }
+
+        for(int r = 0; r < ratio - 1; r++)
+        {
+            for (int copy = 0; copy < new_length; copy++)
+            {
+                expand->a[expand->n].color = expand->a[expand->n - new_length].color;
+                expand->n++;
+            }
+        }
+    }
+    printf("\nImage expanded with success!\n");
+    return expand;
 }
 
 
@@ -748,20 +1001,3 @@ unsigned char sumFilterGray(ImageGray *image,float filter[9], int line, int col)
     return (unsigned char) value;
 }
 
-
-int main() 
-{
-    ImageRGB* imagemColor = read_rgb("bike3.ppm");
-    float filter2[9] = {-1, -1, -1,
-                        -1,  8, -1,
-                        -1, -1, -1};
-    float filer1[9] = {-1,0,1,0,0,0,1,0,-1};
-   /*  write_rgb(imagemColor, "testeCenas.ppm"); */
-    /* apply_filter_toRGB(imagemColor, filer1);
-    write_rgb(imagemColor, "filtroteste.ppm");  */
-
-    ImageGray* imagemGray = convert_rbgToGray(imagemColor);
-    apply_filter_toGray(imagemGray, filter2);
-    write_gray(imagemGray, "testeGray.ppm");
-
-}

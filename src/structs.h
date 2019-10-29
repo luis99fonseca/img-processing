@@ -185,10 +185,16 @@ void write_bin(ImageBin *image, char* file_name);
 */
 void change_rgb_intensity(ImageRGB *image, char intensity);
 
+/**
+ * Method to change the intensity of a Grayscale image.
+ * 
+ * @param image A pointer to the Grayscale image.
+ * @param char Intensity value. 
+*/
 void change_grayscale_intensity(ImageGray *image, char intensity);
 
 /**
- * Method to crop a RGB image, given a starting and an ending points.
+ * Method to crop a RGB image, given a starting and ending point.
  * 
  * @param image A pointer to the RGB image.
  * @param x1 First pixel x coordinate.
@@ -196,56 +202,145 @@ void change_grayscale_intensity(ImageGray *image, char intensity);
  * @param x2 Second pixel x coordinate.
  * @param y2 Second pixel y coordinate.
 */
-ImageRGB * crop(ImageRGB *image, int x1, int y1, int x2, int y2);
+ImageRGB * crop_rgb(ImageRGB *image, int x1, int y1, int x2, int y2);
 
 /**
- * Method verlap a specific area of a RGB image with another one smaller, given a starting point.
+ * Method to crop a Grayscale image, given a starting and ending point.
+ * 
+ * @param image A pointer to the RGB image.
+ * @param x1 First pixel x coordinate.
+ * @param y1 First pixel y coordinate.
+ * @param x2 Second pixel x coordinate.
+ * @param y2 Second pixel y coordinate.
+*/
+ImageGray * crop_grayscale(ImageGray *image, int x1, int y1, int x2, int y2);
+
+/**
+ * Method to overlap a specific area of a RGB image with another one smaller, given a starting point.
  * 
  * @param image A pointer to the RGB image to be overlapped.
- * @param crop A ponter to the smaller RGB image.
+ * @param piece A ponter to the smaller RGB image.
  * @param x Start position x coordinate.
  * @param y Start position y coordinate.
 */
-void overlap(ImageRGB *image, ImageRGB *crop, int x, int y);
+void overlap_rgb(ImageRGB *image, ImageRGB *piece, int x, int y);
 
 /**
- * Method to create a water mark in an image, givin a starting point.
+ * Method to overlap a specific area of a Grayscale image with another one smaller, given a starting point.
+ * 
+ * @param image A pointer to the Grayscale image to be overlapped.
+ * @param piece A ponter to the smaller Grayscale image.
+ * @param x Start position x coordinate.
+ * @param y Start position y coordinate.
+*/
+void overlap_grayscale(ImageGray *image, ImageGray *piece, int x, int y);
+
+/**
+ * Method to create a water mark in a RGB image, given a starting point.
  * 
  * @param image A pointer to the RGB image to place a water mark.
  * @param x1 Start position x coordinate.
  * @param y1 Start position y coordinate.
 */
-void create_water_mark(ImageRGB *image, int x, int y);
+void rgb_water_mark(ImageRGB *image, int x, int y);
+
+/**
+ * Method to create a water mark in a Grayscale image, given a starting point.
+ * 
+ * @param image A pointer to the Grayscale image to place a water mark.
+ * @param x1 Start position x coordinate.
+ * @param y1 Start position y coordinate.
+*/
+void grayscale_water_mark(ImageGray *image, int x, int y);
 
 /**
  * Method to invert a RGB image horizontally.
  * 
  * @param image A pointer to the RGB image that will be inverted. 
 */
-void invert_horizontally(ImageRGB *image);
+void rgb_invert_horizontally(ImageRGB *image);
+
+/**
+ * Method to invert a Grayscale image horizontally.
+ * 
+ * @param image A pointer to the Grayscale image that will be inverted. 
+*/
+void grayscale_invert_horizontally(ImageGray *image);
 
 /**
  * Method to invert a RGB image vertically.
  * 
  * @param image A pointer to the RGB image that will be inverted.
 */
-void invert_vertically(ImageRGB *image);
+void rgb_invert_vertically(ImageRGB *image);
+
+/**
+ * Method to invert a Grayscale image vertically.
+ * 
+ * @param image A pointer to the Grayscale image that will be inverted.
+*/
+void grayscale_invert_vertically(ImageGray *image);
 
 /**
  * Method to rotate a RGB image -90 degrees.
  * 
  * @param image A pointer to the RGB image that will be rotated -90º.
 */
-void rotate_right(ImageRGB *image);
+void rgb_rotate_right(ImageRGB *image);
+
+/**
+ * Method to rotate a Grayscale image -90 degrees.
+ * 
+ * @param image A pointer to the Grayscale image that will be rotated -90º.
+*/
+void grayscale_rotate_right(ImageGray *image);
 
 /**
  * Method to rotate a RGB image 90 degrees.
  * 
  * @param image A pointer to the RGB image that will be rotated 90º.
 */
-void rotate_left(ImageRGB *image);
+void rgb_rotate_left(ImageRGB *image);
 
-ImageRGB * shrink_rgb(ImageRGB *image, char ratio);
+/**
+ * Method to rotate a Grayscale image 90 degrees.
+ * 
+ * @param image A pointer to the Grayscale image that will be rotated 90º.
+*/
+void grayscale_rotate_left(ImageGray *image);
+
+
+/**
+ * Method to reduce a RGB image in a specific ratio.
+ * 
+ * @param image A pointer to the RGB image.
+ * @param ratio reducing ratio value. (i.e. ratio = 2 -> reduce by half)
+*/
+ImageRGB * rgb_reduce(ImageRGB *image, char ratio);
+
+/**
+ * Method to reduce a Grayscale image in a specific ratio.
+ * 
+ * @param image A pointer to the Grayscale image.
+ * @param ratio reducing ratio value. (i.e. ratio = 2 -> reduce by half)
+*/
+ImageGray * grayscale_reduce(ImageGray *image, char ratio);
+
+/**
+ * Method to expand a RGB image in a specific ratio.
+ * 
+ * @param image A pointer to the RGB image.
+ * @param ratio expanding ratio value. (i.e. ratio = 2 -> expand 2 times)
+*/
+ImageRGB * rgb_expand(ImageRGB *image, char ratio);
+
+/**
+ * Method to expand a Grayscale image in a specific ratio.
+ * 
+ * @param image A pointer to the Grayscale image.
+ * @param ratio expanding ratio value. (i.e. ratio = 2 -> expand 2 times)
+*/
+ImageGray * grayscale_expand(ImageGray *image, char ratio);
 
 
 ImageGray* convert_rbgToGray(ImageRGB* image);
