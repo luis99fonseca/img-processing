@@ -1,35 +1,39 @@
 # img-processing
-Repository to develop an image processing program in C.
 
-## Formas de representar píxeis
+**Descrição**: Repositório para o desenvolvimento de estruturas, métodos e pequenos programas de manipulação de imagens, utilizando a linguagem de programação C.
 
-```c
-// RGB
-typedef struct {
-    uchar r,g,b;
-} RGBPixel;
+Link do repositório privado no GitHub: [https://github.com/tiagocmendes/img-processing](https://github.com/tiagocmendes/img-processing)
 
-uint data; // + mask
 
-uchar data[3];
+## Estrutura
 
-// Binary
-uchar {0 1} 
+Todas as estruturas e métodos desenvolvidos para a manipulação de imagens estão presentes nos ficheiros **structs.h** e **structs.c**, na pasta **src**. Nesta pasta, também estão presentes os programas de teste, de nomenclatura *p-numero-do-programa.c*, bem como o respetivo ficheiro **Makefile** de compilação.
+
+Na pasta **out**, irão estar presentes as imagens **.ppm** geradas a partir dos nossos programas de teste, após a sua execução.
+
+Na pasta **img**, encontram-se as imagens que irão ser manipuladas.
+
+Por fim, na pasta **doc**, encontra-se a documentação gerada automaticamente com o Doxygen.
+
+## Compilar e executar
+
+Para compilar e executar os diversos programas de teste, apenas terá de utilizar o ficheiro **Makefile**, presente na pasta **src**, como se ilustra nos seguintes exemplos:
+
+**Compilar e executar o programa de testes no. 1:**
+
+```console
+$ make p1
+./p1
 ```
 
-## Formas de representar imagens
+**Compilar e executar o programa de testes no. 8:**
 
-RGBPixel(**data; data[][]);
-        (*data; poslin = l*nc + c);
+```console
+$ make p8
+./p8
+```
 
-## Aceder a um elemento de uma matriz num array unidimensional
+## Autores - Grupo 1
 
-Matrix N*M
-
-índices: i pertence a [0, N-1], j pertence a [0, M-1]
-
-Posição do elemento (i,j):
-
-matriz[i][j] = array[i*M + j]
-
-[https://stackoverflow.com/questions/14015556/how-to-map-the-indexes-of-a-matrix-to-a-1-dimensional-array-c](https://stackoverflow.com/questions/14015556/how-to-map-the-indexes-of-a-matrix-to-a-1-dimensional-array-c)
+* 89066 - Luís Carlos Duarte Fonseca
+* 88886 - Tiago Carvalho Mendes
