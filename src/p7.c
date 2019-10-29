@@ -2,6 +2,9 @@
 #include "structs.h"
 #include "filters.c"
 
+/**
+ * Simple program to crop a RGB image, apply a filter and overlap the cropped area in the original image.
+*/
 int main(){
 
     printf("\nLoading first RGB image...\n");

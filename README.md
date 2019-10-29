@@ -17,7 +17,7 @@ Por fim, na pasta **doc**, encontra-se a documentação gerada automaticamente c
 
 ## Compilar e executar
 
-Para compilar e executar os diversos programas de teste, apenas terá de utilizar o ficheiro **Makefile**, presente na pasta **src**, como se ilustra nos seguintes exemplos:
+Para compilar e executar os diversos programas de teste, apenas terá de utilizar o ficheiro **Makefile**, presente na pasta **src**, como se ilustra nos seguintes exemplos. **Importante:** Por favor, execute os programas de testes por ordem crescente do seu número. 
 
 **Compilar e executar o programa de testes no. 1:**
 

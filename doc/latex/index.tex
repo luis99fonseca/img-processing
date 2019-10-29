@@ -1,35 +1,43 @@
-Repository to develop an image processing program in C.
+{\bfseries Descrição}\+: Repositório para o desenvolvimento de estruturas, métodos e pequenos programas de manipulação de imagens, utilizando a linguagem de programação C.
 
-\subsection*{Formas de representar píxeis}
+Link do repositório privado no Git\+Hub\+: \href{https://github.com/tiagocmendes/img-processing}{\tt https\+://github.\+com/tiagocmendes/img-\/processing}
+
+\subsection*{Estrutura}
+
+Todas as estruturas e métodos desenvolvidos para a manipulação de imagens estão presentes nos ficheiros {\bfseries \hyperlink{structs_8h}{structs.\+h}} e {\bfseries \hyperlink{structs_8c}{structs.\+c}}, na pasta {\bfseries src}. Nesta pasta, também estão presentes os programas de teste, de nomenclatura {\itshape p-\/numero-\/do-\/programa.\+c}, bem como o respetivo ficheiro {\bfseries Makefile} de compilação.
+
+Na pasta {\bfseries out}, irão estar presentes as imagens $\ast$$\ast$.ppm$\ast$$\ast$ geradas a partir dos nossos programas de teste, após a sua execução.
+
+Na pasta {\bfseries img}, encontram-\/se as imagens que irão ser manipuladas.
+
+Por fim, na pasta {\bfseries doc}, encontra-\/se a documentação gerada automaticamente com o Doxygen.
+
+\subsection*{Compilar e executar}
+
+Para compilar e executar os diversos programas de teste, apenas terá de utilizar o ficheiro {\bfseries Makefile}, presente na pasta {\bfseries src}, como se ilustra nos seguintes exemplos. {\bfseries Importante\+:} Por favor, execute os programas de testes por ordem crescente do seu número.
+
+{\bfseries Compilar e executar o programa de testes no. 1\+:}
 
 
 \begin{DoxyCode}
-\textcolor{comment}{// RGB}
-\textcolor{keyword}{typedef} \textcolor{keyword}{struct }\{
-    uchar r,g,b;
-\} \hyperlink{structRGBPixel}{RGBPixel};
-
-uint data; \textcolor{comment}{// + mask}
-
-uchar data[3];
-
-\textcolor{comment}{// Binary}
-uchar \{0 1\} 
+$ make p1
+./p1
 \end{DoxyCode}
 
 
-\subsection*{Formas de representar imagens}
+{\bfseries Compilar e executar o programa de testes no. 8\+:}
 
-\hyperlink{structRGBPixel}{R\+G\+B\+Pixel}($\ast$$\ast$data; data\mbox{[}\mbox{]}\mbox{[}\mbox{]}); ($\ast$data; poslin = l$\ast$nc + c);
 
-\subsection*{Aceder a um elemento de uma matriz num array unidimensional}
+\begin{DoxyCode}
+$ make p8
+./p8
+\end{DoxyCode}
 
-Matrix N$\ast$M
 
-índices\+: i pertence a \mbox{[}0, N-\/1\mbox{]}, j pertence a \mbox{[}0, M-\/1\mbox{]}
+\subsection*{Autores -\/ Grupo 1}
 
-Posição do elemento (i,j)\+:
 
-matriz\mbox{[}i\mbox{]}\mbox{[}j\mbox{]} = array\mbox{[}i$\ast$M + j\mbox{]}
-
-\href{https://stackoverflow.com/questions/14015556/how-to-map-the-indexes-of-a-matrix-to-a-1-dimensional-array-c}{\tt https\+://stackoverflow.\+com/questions/14015556/how-\/to-\/map-\/the-\/indexes-\/of-\/a-\/matrix-\/to-\/a-\/1-\/dimensional-\/array-\/c} 
+\begin{DoxyItemize}
+\item 89066 -\/ Luís Carlos Duarte Fonseca
+\item 88886 -\/ Tiago Carvalho Mendes 
+\end{DoxyItemize}

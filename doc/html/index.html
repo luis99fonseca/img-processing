@@ -63,16 +63,22 @@ $(function() {
 <div class="title">img-processing </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Repository to develop an image processing program in C.</p>
-<h2>Formas de representar píxeis</h2>
-<div class="fragment"><div class="line"><span class="comment">// RGB</span></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div><div class="line">    uchar r,g,b;</div><div class="line">} <a class="code" href="structRGBPixel.html">RGBPixel</a>;</div><div class="line"></div><div class="line">uint data; <span class="comment">// + mask</span></div><div class="line"></div><div class="line">uchar data[3];</div><div class="line"></div><div class="line"><span class="comment">// Binary</span></div><div class="line">uchar {0 1} </div></div><!-- fragment --><h2>Formas de representar imagens</h2>
-<p><a class="el" href="structRGBPixel.html">RGBPixel</a>(**data; data[][]); (*data; poslin = l*nc + c);</p>
-<h2>Aceder a um elemento de uma matriz num array unidimensional</h2>
-<p>Matrix N*M</p>
-<p>índices: i pertence a [0, N-1], j pertence a [0, M-1]</p>
-<p>Posição do elemento (i,j):</p>
-<p>matriz[i][j] = array[i*M + j]</p>
-<p><a href="https://stackoverflow.com/questions/14015556/how-to-map-the-indexes-of-a-matrix-to-a-1-dimensional-array-c">https://stackoverflow.com/questions/14015556/how-to-map-the-indexes-of-a-matrix-to-a-1-dimensional-array-c</a> </p>
+<div class="textblock"><p><b>Descrição</b>: Repositório para o desenvolvimento de estruturas, métodos e pequenos programas de manipulação de imagens, utilizando a linguagem de programação C.</p>
+<p>Link do repositório privado no GitHub: <a href="https://github.com/tiagocmendes/img-processing">https://github.com/tiagocmendes/img-processing</a></p>
+<h2>Estrutura</h2>
+<p>Todas as estruturas e métodos desenvolvidos para a manipulação de imagens estão presentes nos ficheiros <b><a class="el" href="structs_8h.html">structs.h</a></b> e <b><a class="el" href="structs_8c.html">structs.c</a></b>, na pasta <b>src</b>. Nesta pasta, também estão presentes os programas de teste, de nomenclatura <em>p-numero-do-programa.c</em>, bem como o respetivo ficheiro <b>Makefile</b> de compilação.</p>
+<p>Na pasta <b>out</b>, irão estar presentes as imagens **.ppm** geradas a partir dos nossos programas de teste, após a sua execução.</p>
+<p>Na pasta <b>img</b>, encontram-se as imagens que irão ser manipuladas.</p>
+<p>Por fim, na pasta <b>doc</b>, encontra-se a documentação gerada automaticamente com o Doxygen.</p>
+<h2>Compilar e executar</h2>
+<p>Para compilar e executar os diversos programas de teste, apenas terá de utilizar o ficheiro <b>Makefile</b>, presente na pasta <b>src</b>, como se ilustra nos seguintes exemplos. <b>Importante:</b> Por favor, execute os programas de testes por ordem crescente do seu número.</p>
+<p><b>Compilar e executar o programa de testes no. 1:</b></p>
+<div class="fragment"><div class="line">$ make p1</div><div class="line">./p1</div></div><!-- fragment --><p><b>Compilar e executar o programa de testes no. 8:</b></p>
+<div class="fragment"><div class="line">$ make p8</div><div class="line">./p8</div></div><!-- fragment --><h2>Autores - Grupo 1</h2>
+<ul>
+<li>89066 - Luís Carlos Duarte Fonseca</li>
+<li>88886 - Tiago Carvalho Mendes </li>
+</ul>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

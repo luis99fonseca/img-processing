@@ -1,7 +1,14 @@
 var searchData=
 [
-  ['water_5fmark_2ec',['water_mark.c',['../water__mark_8c.html',1,'']]],
-  ['write_5fbin',['write_bin',['../structs_8c.html#af4170c8dae3db1f9848100550750d154',1,'write_bin(ImageBin *image):&#160;structs.c'],['../structs_8h.html#af4170c8dae3db1f9848100550750d154',1,'write_bin(ImageBin *image):&#160;structs.c']]],
-  ['write_5fgray',['write_gray',['../structs_8c.html#ab79adb395c229cdd49f5bd66a1afdc66',1,'write_gray(ImageGray *image):&#160;structs.c'],['../structs_8h.html#ab79adb395c229cdd49f5bd66a1afdc66',1,'write_gray(ImageGray *image):&#160;structs.c']]],
-  ['write_5frgb',['write_rgb',['../structs_8c.html#ad214f9637e66d1ca560e3122c9c19bab',1,'write_rgb(ImageRGB *image, char *file_name):&#160;structs.c'],['../structs_8h.html#ad214f9637e66d1ca560e3122c9c19bab',1,'write_rgb(ImageRGB *image, char *file_name):&#160;structs.c']]]
+  ['p1_2ec',['p1.c',['../p1_8c.html',1,'']]],
+  ['p10_2ec',['p10.c',['../p10_8c.html',1,'']]],
+  ['p11_2ec',['p11.c',['../p11_8c.html',1,'']]],
+  ['p2_2ec',['p2.c',['../p2_8c.html',1,'']]],
+  ['p3_2ec',['p3.c',['../p3_8c.html',1,'']]],
+  ['p4_2ec',['p4.c',['../p4_8c.html',1,'']]],
+  ['p5_2ec',['p5.c',['../p5_8c.html',1,'']]],
+  ['p6_2ec',['p6.c',['../p6_8c.html',1,'']]],
+  ['p7_2ec',['p7.c',['../p7_8c.html',1,'']]],
+  ['p8_2ec',['p8.c',['../p8_8c.html',1,'']]],
+  ['p9_2ec',['p9.c',['../p9_8c.html',1,'']]]
 ];

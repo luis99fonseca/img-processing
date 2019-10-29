@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['length',['length',['../structImageRGB.html#aade093b3345da900be6b0b572e1a2ff3',1,'ImageRGB::length()'],['../structImageBin.html#a9ef9ab5f89fcb7e82ad84a8c0c537add',1,'ImageBin::length()'],['../structImageGray.html#a8b7307978071511731a34a2a011efddd',1,'ImageGray::length()']]]
+  ['edgedetection1',['edgeDetection1',['../filters_8c.html#a7ce0e9f5115e96a802dcc14f9cf71712',1,'filters.c']]],
+  ['edgedetection2',['edgeDetection2',['../filters_8c.html#a0ed32f31b89a242e44c62d4f0c9539bf',1,'filters.c']]],
+  ['edgedetection3',['edgeDetection3',['../filters_8c.html#a31dc9f52a20d519f0cd9925f2ce78811',1,'filters.c']]]
 ];

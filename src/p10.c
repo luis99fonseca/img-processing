@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include "structs.h"
 
+/**
+ * Simple program to reduce a RGB image 2, 4 and 8 times and also expand it 2 and 4 times. 
+*/
 int main() 
 {   
     printf("\nLoading first RGB image...\n");

@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include "structs.h"
 
+/**
+ * Simple program to place a watermark in RGB and grayscale images.
+*/
 int main() 
 {   
     printf("\nLoading first RGB image...\n");

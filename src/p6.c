@@ -2,6 +2,9 @@
 #include "structs.h"
 #include "filters.c"
 
+/**
+ * Simple program to apply a filter to RGB and grayscale images. 
+*/
 int main(){
 
     printf("\nLoading first RGB image...\n");

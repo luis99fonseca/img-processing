@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include "structs.h"
 
+/**
+ * Simple program to rotate a grayscale image (to left and rigth) . 
+*/
 int main() 
 {   
     //Note: its required for p2.c to be run beforehand

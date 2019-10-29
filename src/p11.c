@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include "structs.h"
 
+/**
+ * Simple program to crop, invert vertically and horizontally, place water mark and overlap a RGB image.
+*/
 int main() 
 {   
     printf("\nLoading first RGB image...\n");

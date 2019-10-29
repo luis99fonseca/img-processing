@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['main',['main',['../main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;main.c'],['../water__mark_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;water_mark.c']]],
-  ['main_2ec',['main.c',['../main_8c.html',1,'']]]
+  ['imagebin',['ImageBin',['../structImageBin.html',1,'']]],
+  ['imagegray',['ImageGray',['../structImageGray.html',1,'']]],
+  ['imagergb',['ImageRGB',['../structImageRGB.html',1,'']]],
+  ['img_2dprocessing',['img-processing',['../index.html',1,'']]]
 ];

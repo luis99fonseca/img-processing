@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include "structs.h"
 
+/**
+ * Simple program to load 3 RGB images and save them in a new file.
+*/
 int main() 
 {   
     printf("\nLoading first RGB image...\n");

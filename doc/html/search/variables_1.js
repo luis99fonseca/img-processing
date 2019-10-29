@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['color',['color',['../structGrayPixel.html#a77f0959601895486bddb03723a938903',1,'GrayPixel::color()'],['../structBinaryPixel.html#ad757dfcdc7f0fae97a0ae2a536ed6d8a',1,'BinaryPixel::color()']]]
+  ['boxblur',['boxBlur',['../filters_8c.html#a8c27d8e192cbf12e98859f8c15d59ced',1,'filters.c']]]
 ];

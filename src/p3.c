@@ -3,6 +3,10 @@
 #include <string.h>
 #include "structs.h"
 
+/**
+ * Simple program to load and convert a grayscale image to binary with an hardcoded threshold
+ * and save it to a file.
+*/
 int main(int argc, char *argv[]) 
 {   
     

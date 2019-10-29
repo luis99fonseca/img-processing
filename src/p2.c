@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include "structs.h"
 
+/**
+ * Simple program to:
+ * First: load and convert one RGB image to grayscale, and save it.
+ * Second: load and convert one grayscale image to binary, and save it.
+*/
 int main() 
 {   
     printf("\nLoading first RGB image...\n");

@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include "structs.h"
 
+/**
+ * Simple program to increase and decrease the intensity of RGB and grayscale images.
+*/
 int main() 
 {   
     printf("\nLoading first RGB image...\n");

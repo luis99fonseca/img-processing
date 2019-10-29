@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['length',['length',['../structImageRGB.html#aade093b3345da900be6b0b572e1a2ff3',1,'ImageRGB::length()'],['../structImageBin.html#a9ef9ab5f89fcb7e82ad84a8c0c537add',1,'ImageBin::length()'],['../structImageGray.html#a8b7307978071511731a34a2a011efddd',1,'ImageGray::length()']]]
+  ['heigth',['heigth',['../structImageRGB.html#aa1dbfe9fed4d3988825125b84aae6bfd',1,'ImageRGB::heigth()'],['../structImageBin.html#abbfd6bd9009e4f3964fbd22466920387',1,'ImageBin::heigth()'],['../structImageGray.html#ab21f876eabd63b8536223a18f1bac2cd',1,'ImageGray::heigth()']]]
 ];

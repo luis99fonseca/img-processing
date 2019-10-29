@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include "structs.h"
 
+/**
+ * Simple program to invert a RGB image horizontally and vertically. 
+*/
 int main() 
 {   
     //Note: its required for p2.c to be run beforehand
