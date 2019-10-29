@@ -4,7 +4,8 @@
 /**
  * Simple program to:
  * First: load and convert one RGB image to grayscale, and save it.
- * Second: load and convert one grayscale image to binary, and save it.
+ * Second: convert that grayscale back to RGB, and save it.
+ * Third: load and convert one grayscale image to binary, and save it.
 */
 int main() 
 {   
@@ -19,6 +20,9 @@ int main()
     printf("\nSaving new grayscale image to a file...\n");
     write_gray(gray_image, "../out/p2.ppm");
     printf("\nImage saved with sucess!\n");
+
+    ImageRGB* imargb = convert_GrayToRGB(gray_image);
+    write_rgb(imargb, "../out/p2-rgb.ppm");
 
     printf("\nConverting first image to binary...\n");
     ImageBin* bin_image = convert_grayToBin(gray_image, 128);

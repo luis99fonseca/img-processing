@@ -2,7 +2,7 @@
 #include "structs.h"
 
 /**
- * Simple program to crop, invert vertically and horizontally, place water mark and overlap a RGB image.
+ * Simple program to crop, invert vertically and horizontally, place water mark and overlap a (gray colored) RGB image.
 */
 int main() 
 {   
@@ -21,6 +21,8 @@ int main()
     ImageRGB* i3 = rgb_reduce(i2, 2);
 
     rgb_invert_horizontally(i3);
+
+    color_RGBtoGray(i1);
 
     overlap_rgb(i1, i3, 0, 0);
 

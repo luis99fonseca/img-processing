@@ -345,14 +345,14 @@ ImageGray * grayscale_expand(ImageGray *image, char ratio);
 /**
  * Method to convert a RGB image in Grayscale image
  * 
- * @param image A pointer to the Grayscale image.
+ * @param image A pointer to the RGB image.
 */
 ImageGray* convert_rbgToGray(ImageRGB* image);
 
 /**
  * Method to convert a RGB image in Grayscale image, based on given color channel
  * 
- * @param image A pointer to the Grayscale image.
+ * @param image A pointer to the RGB image.
  * @param color one of the following: \c Red , \c Green , \c Blue 
 */
 ImageGray* convert_rbgToGrayParametized(ImageRGB* image, char* color);
@@ -401,4 +401,19 @@ void apply_filter_toGray(ImageGray* image, float filter[9]);
  * @param col horizontal location of pixel to apply calculations to
 */
 unsigned char sumFilterGray(ImageGray *image,float filter[9], int line, int col);
+
+/**
+ * Method to convert a Gray image in RGB image
+ * 
+ * @param image A pointer to the Grayscale image.
+*/
+ImageRGB* convert_GrayToRGB(ImageGray* image);
+
+/**
+ * Method to color into Gray, an RGB image
+ * 
+ * @param image A pointer to the RGB image.
+*/
+void color_RGBtoGray(ImageRGB* image);
+
 

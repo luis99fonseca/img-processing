@@ -992,6 +992,30 @@ unsigned char sumFilterGray(ImageGray *image,float filter[9], int line, int col)
     return (unsigned char) value;
 }
 
+ImageRGB* convert_GrayToRGB(ImageGray* image){
+    ImageRGB* new_image = create_imageRGB(image->length, image->heigth);
+
+    for (int index = 0; index < image->heigth * image->length; index++){
+        for (int color = 0; color < 3; color ++){
+            new_image->a[index].rgb[color] = image->a[index].color;
+        }
+    }
+    return new_image;
+
+}
+
+void color_RGBtoGray(ImageRGB* image){
+
+    for (int index = 0; index < image->heigth * image->length; index++){
+        unsigned char temp_color = ((0.3 * image->a[index].rgb[0]) + (0.6 * image->a[index].rgb[1]) + (0.10 * image->a[index].rgb[3]));
+        for (int color = 0; color < 3; color++){
+            image->a[index].rgb[color] = temp_color;
+        }
+
+    }
+
+}
+
 /*
 int main() 
 {   
