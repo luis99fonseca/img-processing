@@ -13,6 +13,7 @@ int main()
     write_rgb(i1, "../out/p5_water_mark1.ppm");
     printf("\nImage saved with success!");
 
+    //Note: its required for p2.c to be run beforehand
     printf("\nLoading first Grayscale image...\n");
     ImageGray* i2 = read_gray("../out/p2.ppm");
     printf("\nImage load with success!\n");

@@ -3,6 +3,7 @@
 
 int main() 
 {   
+    //Note: its required for p2.c to be run beforehand
     printf("\nLoading first RGB image...\n");
     ImageRGB* i1 = read_rgb("../img/lena.ppm");
     printf("\nImage load with success!\n");

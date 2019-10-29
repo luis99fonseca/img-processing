@@ -3,6 +3,7 @@
 
 int main() 
 {   
+    //Note: its required for p2.c to be run beforehand
     printf("\nLoading first Grayscale image...\n");
     ImageGray* i1 = read_gray("../out/p2.ppm");
     printf("\nImage load with success!\n");

@@ -12,7 +12,7 @@ P7 = p7.o structs.o
 P8 = p8.o structs.o
 P9 = p9.o structs.o
 P10 = p10.o structs.o
-P11 = fibonnaci.o structs.o
+P11 = p11.o structs.o
 
 LIBS=-lm
 

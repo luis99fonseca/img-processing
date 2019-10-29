@@ -20,7 +20,7 @@ int main(){
     printf("\nImage saved with sucess!\n");
 
     printf("\nApplying filter to Grayscale image...\n");
-    apply_filter_toGray(gray_image, edgeDetection1);
+    apply_filter_toGray(gray_image, edgeDetection1);//Feel free to choose any of the filters at filters.c -> link nisto :D
 
     printf("\nSaving new grayscale image to a file...\n");
     write_gray(gray_image, "../out/p06-2.ppm");

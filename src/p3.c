@@ -5,19 +5,14 @@
 
 int main(int argc, char *argv[]) 
 {   
-    if(argc != 2) 
-    {
-        printf("Invalid number of arguments!\n");
-        printf("USAGE: $./p3 [threshold]\n");
-        exit(EXIT_FAILURE);
-    }
-
+    
+    //Note: its required for p2.c to be run beforehand
     printf("\nLoading first grayscale image...\n");
     ImageGray* i1 = read_gray("../out/p2.ppm");
     printf("\nImage load with success!\n");
 
     printf("\nConverting grayscale to binary...\n");
-    ImageBin* bin_image = convert_grayToBin(i1, argv[1]);
+    ImageBin* bin_image = convert_grayToBin(i1, 128);
     printf("\nConverted image with success!\n");
 
     printf("\nSaving new binary image to a file...\n");

@@ -3,7 +3,6 @@
 #include <string.h>
 #include <math.h>
 #include "structs.h"
-#include "filters.c"
 
 RGBPixel * create_rgb_pixel(unsigned char *rgb)
 {
