@@ -342,13 +342,63 @@ ImageRGB * rgb_expand(ImageRGB *image, char ratio);
 */
 ImageGray * grayscale_expand(ImageGray *image, char ratio);
 
-
+/**
+ * Method to convert a RGB image in Grayscale image
+ * 
+ * @param image A pointer to the Grayscale image.
+*/
 ImageGray* convert_rbgToGray(ImageRGB* image);
+
+/**
+ * Method to convert a RGB image in Grayscale image, based on given color channel
+ * 
+ * @param image A pointer to the Grayscale image.
+ * @param color one of the following: \c Red , \c Green , \c Blue 
+*/
 ImageGray* convert_rbgToGrayParametized(ImageRGB* image, char* color);
+
+/**
+ * Method to convert a Grayscale image in Binary image
+ * 
+ * @param image A pointer to the Grayscale image.
+ * @param threshold a value between 0 and 255, from which the pixel shall be colored
+*/
 ImageBin* convert_grayToBin(ImageGray* image, unsigned char threshold);
 
+/**
+ * Method to apply a filter to a RGB image in given a filter of 3*3 dimention
+ * 
+ * @param image A pointer to the RGB image.
+ * @param filter an array with a preferably valid kernel
+*/
 void apply_filter_toRGB(ImageRGB* image, float filter[9]);
+
+/**
+ * Auxiliary function, which calculates de value of a given pixel, by defined RGB channel
+ * 
+ * @param image A pointer to the RGB image.
+ * @param filter an array with a preferably valid kernel
+ * @param line vertical location of pixel to apply calculations to
+ * @param col horizontal location of pixel to apply calculations to
+ * @param channel a value between 0 and 2, representing the colors of the RGB format
+*/
 unsigned char sumFilterRGB(ImageRGB *image,float filter[9], int line, int col, char channel);
+
+/**
+ * Method to apply a filter to a Grayscale image in given a filter of 3*3 dimention
+ * 
+ * @param image A pointer to the Grayscale image.
+ * @param filter an array with a preferably valid kernel
+*/
 void apply_filter_toGray(ImageGray* image, float filter[9]);
+
+/**
+ * Auxiliary function, which calculates de value of a given pixel, in a Grayscaled image
+ * 
+ * @param image A pointer to the RGB image.
+ * @param filter an array with a preferably valid kernel
+ * @param line vertical location of pixel to apply calculations to
+ * @param col horizontal location of pixel to apply calculations to
+*/
 unsigned char sumFilterGray(ImageGray *image,float filter[9], int line, int col);
 

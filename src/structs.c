@@ -83,7 +83,7 @@ ImageGray * read_gray(char *file_name)
     char *type = (char *) malloc(3 * sizeof(char));
     fscanf(fp, "%s", type);
     printf("%s\n", type);
-    if (strcmp(type,"P5") != 0){	//TODO: TESTAR
+    if (strcmp(type,"P5") != 0){	
     	printf("[ERRO]: %s\n", "Formato de ficheiro inválido!");
         exit(EXIT_FAILURE);
     }
@@ -129,7 +129,6 @@ ImageGray * read_gray(char *file_name)
         image->a[bytes_count++] = *temp_pixel;
     }
     printf("[INFO]: %s; BytesCounted: %d", "Done", bytes_count);
-    printf("[TODO]>>> %u", image->a[bytes_count - 1].color);
     return image;
 }
 
@@ -147,7 +146,7 @@ ImageRGB * read_rgb(char *file_name)
     char *type = (char *) malloc(3 * sizeof(char));
     fscanf(fp, "%s", type);
     printf("%s\n", type);
-    if (strcmp(type,"P6") != 0){	//TODO: TESTAR
+    if (strcmp(type,"P6") != 0){	
     	printf("%s\n", "Formato de ficheiro inválido!");
         exit(EXIT_FAILURE);
     }
@@ -166,7 +165,7 @@ ImageRGB * read_rgb(char *file_name)
     fscanf(fp, "%d", colorRange);
     printf("%d\n", *colorRange);
 
-    ImageRGB* image = create_imageRGB(*larg, *comp);  //TODO: nao sei se isto funciona
+    ImageRGB* image = create_imageRGB(*larg, *comp); 
 
     //END of first lecture (as a ordinary text file)
     long offset = ftell(fp);
@@ -183,7 +182,7 @@ ImageRGB * read_rgb(char *file_name)
     //variable to store temporary color;
     unsigned char *needsChar = (unsigned char*) malloc(sizeof(unsigned char));
     
-    //variable to keep track of current rbgArray (TODO POR LINK PA ESSA VAR, se possivel) index;
+    //variable to keep track of current rbgArray
     int index = -1;
 
     //TODO debug
@@ -200,7 +199,7 @@ ImageRGB * read_rgb(char *file_name)
        	//after a complete pixel read (aka 3 bytes), do some extra work...
         if (index == 2){
 
-         //   printf("%ld: %u - %u - %u\n",rounds2++, rgbArray[0], rgbArray[1],rgbArray[2]);
+         
             RGBPixel *temp_pixel = create_rgb_pixel(rgbArray);
             image->a[bytes_count++] = *temp_pixel;
 
@@ -208,8 +207,6 @@ ImageRGB * read_rgb(char *file_name)
         }
     }
     printf("[INFO]: %s; BytesCounted: %d", "Done", bytes_count);
-    printf("[TODO]>>> %u", image->a[bytes_count - 1].rgb[0]);
-    printf("[TODO 2]>>> %d", image->heigth);
     return image;
 
 }
@@ -228,7 +225,7 @@ ImageBin * read_bin(char *file_name)
     char *type = (char *) malloc(3 * sizeof(char));
     fscanf(fp, "%s", type);
     printf("%s\n", type);
-    if (strcmp(type,"P4") != 0){	//TODO: TESTAR
+    if (strcmp(type,"P4") != 0){	
     	printf("%s\n", "Formato de ficheiro inválido!");
         exit(EXIT_FAILURE);
     }
@@ -272,7 +269,6 @@ ImageBin * read_bin(char *file_name)
         
     }
     printf("[INFO]: %s; BitsCounted: %d", "Done", bits_count);
-    printf("[TODO]>>> %u", image->a[0].color);
     return image;
 
 }
@@ -280,14 +276,12 @@ ImageBin * read_bin(char *file_name)
 
 void write_rgb(ImageRGB* image, char* file_name){
     FILE *fp = fopen(file_name, "w");   
-    fprintf(fp, "%s\n", "P6");  //TODO : muda os sizes para coiso dinamico 
+    fprintf(fp, "%s\n", "P6");  
     fprintf(fp, "%d %d\n", image->length, image->heigth);
-    fprintf(fp, "%s\n", "255"); // TODO: isto devia tar registado tbm
+    fprintf(fp, "%s\n", "255"); 
     fclose(fp);
     fp = fopen(file_name, "ab");
     for (int index = 0; index < image->heigth * image->length; index++ ){
-        //TODO : meter o "3" menos hardcocded?
-       // printf("ola -> %d\n", index);
         for (int color = 0; color < 3; color++){
             fwrite(&image->a[index].rgb[color], sizeof(unsigned char), 1, fp);
         }
@@ -300,16 +294,15 @@ void write_rgb(ImageRGB* image, char* file_name){
 
 void write_gray(ImageGray *image, char* file_name){
     FILE *fp = fopen(file_name, "w");   
-    fprintf(fp, "%s\n", "P5");  //TODO : muda os sizes para coiso dinamico 
+    fprintf(fp, "%s\n", "P5"); 
     fprintf(fp, "%d %d\n", image->length, image->heigth);
-    fprintf(fp, "%s\n", "255"); // TODO: isto devia tar registado tbm
+    fprintf(fp, "%s\n", "255"); 
     fclose(fp);
     fp = fopen(file_name, "ab");
     for (int index = 0; index < image->heigth * image->length; index++ ){
-        //TODO : meter o "3" menos hardcocded?
+        
         fwrite(&image->a[index].color, sizeof(unsigned char), 1, fp);
     }
-    printf("%u ----", image->a[262143].color);
     fclose(fp);
 }
 
@@ -322,12 +315,16 @@ void write_bin(ImageBin *image, char* file_name){
     fp = fopen(file_name, "ab");
     char bit_index = 7;
     unsigned char temp_color = 0;
+
+    /** Here we play with the bits as following:
+     * each ImageBin has a BinaryPixel, in which the color is at least significative bit (aka, of order 0),
+     * thus, in each loop, we shift that bit to the left (most significative bit posible), in order to form a byte
+     * legible for this format; Once we form a byte, it is written, and a new one is started to be formed;
+    */
     for (int index = 0; index < image->heigth * image->length; index++ ){
-        //TODO : meter o "3" menos hardcocded?
         temp_color |= (image->a[index].color << bit_index--);
-      //  printf("index: %d, color: %u; bitIndex: %d; tempColor: %u\n", index,image->a[index].color, bit_index, temp_color);
         if (bit_index == -1){
-          //  printf("atZero, colorFinal: %u\n", temp_color);
+
             bit_index = 7;
             fwrite(&temp_color, sizeof(unsigned char), 1, fp);
             temp_color = 0;
@@ -827,7 +824,6 @@ ImageGray * grayscale_expand(ImageGray *image, char ratio)
 }
 
 
-//TODO: ver se meto sem retornar novo objeto!! LOL TEM DE SER
 ImageGray* convert_rbgToGray(ImageRGB *image){
     ImageGray* new_image = create_imageGray(image->length, image->heigth);
 
@@ -839,7 +835,7 @@ ImageGray* convert_rbgToGray(ImageRGB *image){
     return new_image;
 }
 
-// TODO : ver pro histograma!! (OTSUUUU)
+
 ImageGray* convert_rbgToGrayParametized(ImageRGB* image, char* color){
     ImageGray* new_image = create_imageGray(image->length, image->heigth);
 
@@ -870,7 +866,7 @@ ImageBin* convert_grayToBin(ImageGray* image, unsigned char threshold){
     return new_image;
 
 }
-void apply_filter_toRGB(ImageRGB* image, float filter[9]){ // TODO: por malloc, pa n inicizalizar
+void apply_filter_toRGB(ImageRGB* image, float filter[9]){ 
     RGBPixel *temp_a = (RGBPixel *)malloc(image->length * image->heigth * sizeof(RGBPixel));
     
     int total_cols = image->length;
@@ -909,7 +905,7 @@ void apply_filter_toRGB(ImageRGB* image, float filter[9]){ // TODO: por malloc, 
 
 }
 
-//TODO : dizer que pa simpliciar é 1 array de fixed size, else tinha de se passar por argumento e era complexidade desnecessária...
+//Note: to simplify, array is of fixed size; initial goal was to allow a little more dinamic approch, see below; 
 unsigned char sumFilterRGB(ImageRGB *image,float filter[9], int line, int col, char channel){
     int value = 0;
     int temp_value;
@@ -917,19 +913,14 @@ unsigned char sumFilterRGB(ImageRGB *image,float filter[9], int line, int col, c
     /* Note: as a parameter, an array becomes a pointer, and once this happens, you can't determine the number of elements in it;
         Thus, if it wasnt for it, we would now calculate the root of the "size of the kernel". Because it would have a fixed size anyway(9), that root would be 3,
         which you can find hardcoded in one of the lines below*/
-  //  printf(":: %s L=%d, C=%d\n","at sumFilter:",line,col);
     for (int temp_line = -1 ; temp_line <= 1; temp_line++){
         for (int temp_col = - 1; temp_col <= 1; temp_col++){  
-           // printf(" ||| line: %d, col: %d; indexA: %d, indexB: %d\n", (temp_line + line), (temp_col + col), (temp_line + line) * image->length + (temp_col + col), (temp_line + 1) * 3 + (temp_col + 1));                                                           //TODO : hardcoded here
             temp_value = image->a[(temp_line + line) * image->length + (temp_col + col)].rgb[channel] * filter[(temp_line + 1) * 3 + (temp_col + 1)];
-          //  printf("corA: %u; corB: %f;  temp_value: %d\n",image->a[(temp_line + line) * image->length + (temp_col + col)].rgb[channel],     filter[(temp_line + 1) * 3 + (temp_col + 1)] ,    temp_value);
             value += temp_value;
         }
     }
     if (value > 255){
-      //  printf("VALOR: %d\n", value);
         value = 255;
-     //   printf("VALOR NOW: %d\n", value);
     } else if (value < 0)
     {
         value = 0;
