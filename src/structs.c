@@ -3,6 +3,7 @@
 #include <string.h>
 #include <math.h>
 #include "structs.h"
+#include "filters.c"
 
 RGBPixel * create_rgb_pixel(unsigned char *rgb)
 {
@@ -928,33 +929,30 @@ unsigned char sumFilter(ImageRGB *image,float filter[9], int line, int col, char
 }
 
 
-/*int main() 
+int main() 
 {   
-    ImageRGB* imagemColor = read_rgb("lena.ppm");
-    ImageGray* imagemGray = convert_rbgToGray(imagemColor);
-    write_gray(imagemGray, "imagemBike.ppm");
-    ImageBin* imageBin = convert_grayToBin(imagemGray, 127);
-  //  ImageBin* imageBin2 = read_bin("imagemBike.ppm");
-    write_bin(imageBin, "ohyeah.ppm");
-    //write_bin(imagemB, "imagemBikenaria.ppm");
-    //ImageRGB *imagem2 = read_rgb("lena.ppm"); 
-    float filter[9] = {(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9),(1.0/9)};
-    float filter2[9] = {-1,-1,-1,
-                        -1,8,-1,
-                        -1,-1,-1};
-    /* apply_filter_toRGB(imagem2, filter);
-    write_rgb(imagem2, "filtros3.ppm"); */
+    printf("\nLoading first RGB image...\n");
+    ImageRGB* i1 = read_rgb("../img/bike3.ppm");
+    printf("\nImage load with success!\n");
+
+    printf("\nConverting first image to grayscale...\n");
+    ImageGray* gray_image = convert_rbgToGray(i1);
+    printf("\nConverted image with success!\n");
+
+    printf("\nApplying filter to RGB image...\n");
+    apply_filter_toRGB(i1, edgeDetection1);
+
+    printf("\nSaving new RGB image to a file...\n");
+    write_rgb(gray_image, "../out/p06-1.ppm");
+    printf("\nImage saved with sucess!\n");
+
+    printf("\nApplying filter to Grayscale image...\n");
+    (i1, edgeDetection1);
+
+    printf("\nSaving new grayscale image to a file...\n");
+    write_gray(gray_image, "../out/p06-1.ppm");
+    printf("\nImage saved with sucess!\n");
 
 
-    /* ImageGray* imagem = read_gray("lena2.ppm");
-    write_gray(imagem, "ola2.ppm");  */
-   /*  ImageGray* imagem3 = convert_rbgToGray(imagem2);
-    write_gray(imagem3, "adeus2.ppm"); */
-    /* ImageGray* imagemR = convert_rbgToGrayParametized(imagem2, "Red");
-    ImageGray* imagemG = convert_rbgToGrayParametized(imagem2, "Green");
-    ImageGray* imagemB = convert_rbgToGrayParametized(imagem2, "Blue");
-    write_gray(imagemR, "colorR.ppm");
-    write_gray(imagemG, "colorG.ppm");
-    write_gray(imagemB, "colorB.ppm"); 
 
-}*/
+}
